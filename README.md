@@ -4,19 +4,19 @@ We want to build a web application that allows EhB students & teachers to schedu
 
 # Acceptance criteria
 
-As as teacher I can sign up using my EhB e-mailaddress
-As as student I can sign up using my EhB e-mailaddress
-As a teacher or student I can login/logout
-As a teacher I can create/view/edit/delete groups
-As a teacher I can view all students
-As a teacher I can (un)assign students to groups
-As a student or teacher I can create/edit/delete an event
-As a teacher I can create/edit/delete an event private to a specific group
-As a student or teacher I can view a list of all events
-As a student I can view a list of all events in my group
-As a student or teacher I can view the details of an event
-As a student or teacher I can see all attendees of an event if I have rights to do so
-As a student or teacher I can indicate if I will be attending an event
+- As as teacher I can sign up using my EhB e-mailaddress
+- As as student I can sign up using my EhB e-mailaddress
+- As a teacher or student I can login/logout
+- As a teacher I can create/view/edit/delete groups
+- As a teacher I can view all students
+- As a teacher I can (un)assign students to groups
+- As a student or teacher I can create/edit/delete an event
+- As a teacher I can create/edit/delete an event private to a specific group
+- As a student or teacher I can view a list of all events
+- As a student I can view a list of all events in my group
+- As a student or teacher I can view the details of an event
+- As a student or teacher I can see all attendees of an event if I have rights to do so
+- As a student or teacher I can indicate if I will be attending an event
 
 # Threat model
 *describe your threat model. One or more architectural diagram expected. Also a list of the principal threats and what you will do about them*
