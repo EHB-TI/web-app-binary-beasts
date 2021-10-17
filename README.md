@@ -23,6 +23,14 @@ We want to build a web application that allows EhB students & teachers to schedu
 
 ![image](https://user-images.githubusercontent.com/21662496/137630627-9030f499-3f2f-4f19-aa65-e11eac747217.png)
 
+## Threads
+- Sensitive data exposure   => Using Cryptography. 
+- Injection => Data Validation, other techniques on database access level like escaping special characters, or using LIMIT in queries to avoid returning data in BULK
+- Identification issues => build in strategies to avoid brute force attacks,prohibit weak passwords, add multifactor authentication, avoid saving clear or encrypted passwords, invalidate tokens and/or session id's after logout, avoid poor password recovery strategies like questions to legitmate user,make use of a well known tested authentication provder library instead of writing the code by yourself, Make use of a secure protocol like Oaut2.0 with openIdconnect for example
+- Authorization issues => use principle of least privileges or deny by default except for public resources,use same access control configuration/mechanisme throughout the complete application
+- CSRF => Use anti forgery token
+- XSS Cros Site Scripting => Using validation and user input sanitization
+
 # Deployment
 *minimally, this section contains a public URL of the app. A description of how your software is deployed is a bonus. Do you do this manually, or did you manage to automate? Have you taken into account the security of your deployment process?*
 
