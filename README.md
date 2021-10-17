@@ -19,7 +19,7 @@ We want to build a web application that allows EhB students & teachers to schedu
 - As a student or teacher I can indicate if I will be attending an event
 
 # Threat model
-*describe your threat model. One or more architectural diagram expected. Also a list of the principal threats and what you will do about them*
+![image](https://user-images.githubusercontent.com/21662496/137630627-9030f499-3f2f-4f19-aa65-e11eac747217.png)
 
 # Deployment
 *minimally, this section contains a public URL of the app. A description of how your software is deployed is a bonus. Do you do this manually, or did you manage to automate? Have you taken into account the security of your deployment process?*
