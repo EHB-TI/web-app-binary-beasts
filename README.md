@@ -19,6 +19,8 @@ We want to build a web application that allows EhB students & teachers to schedu
 - As a student or teacher I can indicate if I will be attending an event
 
 # Threat model
+![image](https://user-images.githubusercontent.com/21662496/137631094-9fde85f5-eb28-42a7-9d59-7aaaff4416a2.png)
+
 ![image](https://user-images.githubusercontent.com/21662496/137630627-9030f499-3f2f-4f19-aa65-e11eac747217.png)
 
 # Deployment
