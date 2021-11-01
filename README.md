@@ -19,9 +19,9 @@ We want to build a web application that allows EhB students & teachers to schedu
 - As a student or teacher I can indicate if I will be attending an event
 
 # Threat model
-![image](https://user-images.githubusercontent.com/21662496/137631094-9fde85f5-eb28-42a7-9d59-7aaaff4416a2.png)
+![image](https://user-images.githubusercontent.com/21662496/139757528-ff6aef38-4c15-4249-8011-092809ffd583.png)
 
-![image](https://user-images.githubusercontent.com/21662496/137630627-9030f499-3f2f-4f19-aa65-e11eac747217.png)
+![image](https://user-images.githubusercontent.com/21662496/139757560-0920c60b-49fd-4fd6-b427-80772bc409ae.png)
 
 ## Threats
 - Sensitive data exposure   => Using Cryptography, Using TLS for REST API, and activating RDS and S3 encryption
