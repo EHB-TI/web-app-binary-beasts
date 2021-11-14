@@ -31,6 +31,31 @@ We want to build a web application that allows EhB students & teachers to schedu
 - CSRF => Use anti forgery token
 - XSS Cros Site Scripting => Using validation and user input sanitization
 
+#Using STRIDE 
+ - Spoofing: 
+     - The User uses a webbrowser to access the application UI there is a risk of spoofing on this level => Solving with Https Encryption and authentication to ensure the auser identity 2FA auth is possible within the app.
+     - The system Administrator uses the AWS console to log to the AWS infrastructure, there the security is guaranteed by AWS so no need for us to add additional scurity
+
+ - Tampering: 
+     - We make use of Encryption to avoid any man in the middle attack so data can not be tampered at this level
+     - Using authorization and roles within the app we are sure that only the authorized people modify data
+     - Between App and data as it is in AWS infrastructure we don't provide any additional security except RDS encryption
+
+ - Repudiation
+    - Using logging we can trace back all the user actions
+
+ - Information Disclosure
+    - Using Cryptography, Using TLS for REST API, and activating RDS and S3 encryption
+
+- Denial of Service
+   - Using loadbalancer and elastic cloud computing AWS provides auto scaling cababilities to ensure availability
+
+- Elevation of privileges
+   - making use of roles within the app will avoid having access to the wrong resources
+   - making use of 2FA will give an additional security when it comes to securing access to the app. It will be difficult to get Admin priviliges for example even if you are able to get admin credentials
+   - role can't be choosen but is automatically assigned by application
+   
+
 # Deployment
 *minimally, this section contains a public URL of the app. A description of how your software is deployed is a bonus. Do you do this manually, or did you manage to automate? Have you taken into account the security of your deployment process?*
 
