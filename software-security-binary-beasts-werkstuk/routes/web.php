@@ -16,9 +16,18 @@ use App\Http\Controllers\GitHubController;
 
 Route::get('/',[App\Http\Controllers\HomeController::class,'redirect']);
 
+
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
+
+Route::resource('events',\App\Http\Controllers\EventsController::class);
+Route::resource('events',\App\Http\Controllers\EventsController::class);
+
+Route::group(['middleware'=>'auth'],function(){
+    Route::resource('events',\App\Http\Controllers\EventsController::class);
+    Route::resource('users',\App\Http\Controllers\UserController::class);
+});
 
 // Github oauth routes
 Route::get("auth/github", [GitHubController::class, 'gitRedirect']);

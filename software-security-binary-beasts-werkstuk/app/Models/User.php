@@ -9,6 +9,8 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 
 class User extends Authenticatable
 {
@@ -63,6 +65,6 @@ class User extends Authenticatable
 
     public function role()
     {
-        return $this->belongsTo('App\Models\Role');
+        return $this->belongsToMany(Role::class);
     }
 }
