@@ -31,7 +31,7 @@ We want to build a web application that allows EhB students & teachers to schedu
 - CSRF => Use anti forgery token
 - XSS Cros Site Scripting => Using validation and user input sanitization
 
-#Using STRIDE 
+# Using STRIDE 
  - Spoofing: 
      - The User uses a webbrowser to access the application UI there is a risk of spoofing on this level => Solving with Https Encryption and authentication to ensure the auser identity 2FA auth is possible within the app.
      - The system Administrator uses the AWS console to log to the AWS infrastructure, there the security is guaranteed by AWS so no need for us to add additional scurity
