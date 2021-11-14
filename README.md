@@ -59,5 +59,11 @@ We want to build a web application that allows EhB students & teachers to schedu
 # Deployment
 *minimally, this section contains a public URL of the app. A description of how your software is deployed is a bonus. Do you do this manually, or did you manage to automate? Have you taken into account the security of your deployment process?*
 
+# Users
+A couple of existing users are already included for testing purposes: 
+
+- admin@ehb.be - Admin1
+- student@student.ehb.be - Student1
+- teacher@teacher.ehb.be - Teacher1
 # *you may want further sections*
 *especially if the use of your application is not self-evident*
