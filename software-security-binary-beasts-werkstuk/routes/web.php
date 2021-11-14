@@ -22,7 +22,6 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 })->name('dashboard');
 
 Route::resource('events',\App\Http\Controllers\EventsController::class);
-Route::resource('events',\App\Http\Controllers\EventsController::class);
 
 Route::group(['middleware'=>'auth'],function(){
     Route::resource('events',\App\Http\Controllers\EventsController::class);
