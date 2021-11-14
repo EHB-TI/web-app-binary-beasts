@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Event;
 
 class EventsController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +15,9 @@ class EventsController extends Controller
      */
     public function index()
     {
-        return view('events.index');
+        // Todo: Stuur voorlopig alle events mee
+        $events = Event::orderBy("date", "asc")->get();
+        return view('events.index', ["events" => $events]);
     }
 
     /**
