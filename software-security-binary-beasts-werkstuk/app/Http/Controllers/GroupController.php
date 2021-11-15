@@ -24,8 +24,11 @@ class GroupController extends Controller
 
         // Todo: also show groups where the user is not just an admin and merge the two or return multiple items
 
-        $groups = Group::where("admin_id", Auth::id())->get();
-        return view('groups.index', ["groups" => $groups]);
+        $membergroups = Auth::user()->groups;
+        //error_log(Auth::id());
+        //error_log(json_encode($groups));
+        $admingroups = Group::where("admin_id", Auth::id())->get();
+        return view('groups.index', ["membergroups" => $membergroups, "admingroups" => $admingroups]);
     }
 
     /**
