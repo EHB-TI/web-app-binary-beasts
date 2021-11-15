@@ -20,7 +20,10 @@ class GroupController extends Controller
      */
     public function index()
     {
-        // We only show groups where the teacher is the admin 
+        // We only show groups where the user is the admin 
+
+        // Todo: also show groups where the user is not just an admin and merge the two or return multiple items
+
         $groups = Group::where("admin_id", Auth::id())->get();
         return view('groups.index', ["groups" => $groups]);
     }
