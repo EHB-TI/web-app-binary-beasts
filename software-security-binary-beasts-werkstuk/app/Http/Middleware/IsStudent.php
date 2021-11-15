@@ -17,7 +17,7 @@ class IsStudent
      */
     public function handle(Request $request, Closure $next)
     {
-        if(Auth::user() && Auth::user()->role()->where("role_name", "STUDENT")->count() == 1){
+        if(Auth::user() && Auth::user()->roles()->where("role_name", "STUDENT")->count() == 1){
             return $next($request);
         }
         return response("Not a student", 401);
