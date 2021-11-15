@@ -28,9 +28,9 @@ class UserRoleSeeder extends Seeder
         $teacherUser = User::find(3);
 
         // Link both together
-        $adminUser->role()->attach($adminRole);
-        $studentUser->role()->attach($studentRole);
-        $teacherUser->role()->attach($teacherRole);
+        $adminUser->roles()->attach($adminRole);
+        $studentUser->roles()->attach($studentRole);
+        $teacherUser->roles()->attach($teacherRole);
         
     }
 }
