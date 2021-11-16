@@ -77,4 +77,26 @@ class User extends Authenticatable
     {
         return $this->hasMany(Group::class);
     }
+
+    public static function search($search){
+        // This static function is used to create the dynamic userstable livewire component
+        // We check if the value is empty first, otherwise we query the db with the input text
+        // where and orWhere sanitize inputs so no SQL injection is possible here
+        return empty($search) ? static::query()->whereHas("roles", function ($q){
+            $q->where("role_name", "STUDENT");
+        })
+            : static::query()->where('id', 'like', '%'.$search.'%')->whereHas("roles", function ($q){
+                $q->where("role_name", "STUDENT");
+            })
+            ->orWhere("name", "like", "%".$search."%")->whereHas("roles", function ($q){
+                $q->where("role_name", "STUDENT");
+            })
+            ->orWhere('email', 'like', '%'.$search.'%')->whereHas("roles", function ($q){
+                $q->where("role_name", "STUDENT");
+            });
+        // return empty($search) ? static::query()
+        //     : static::query()->where('id', 'like', '%'.$search.'%')
+        //         ->orWhere('name', 'like', '%'.$search.'%')
+        //         ->orWhere('email', 'like', '%'.$search.'%');
+    }
 }
