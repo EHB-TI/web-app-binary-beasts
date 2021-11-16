@@ -63,6 +63,10 @@ class GroupController extends Controller
         //
     }
 
+    public function showUser($id){
+        
+    }
+
     /**
      * Show the form for editing the specified resource.
      *

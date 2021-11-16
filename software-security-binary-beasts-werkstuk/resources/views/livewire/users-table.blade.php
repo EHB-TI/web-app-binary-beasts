@@ -47,8 +47,15 @@
         <tbody>
             @foreach($users as $user)
                 <tr>
-                    <td class="border px-4 py-2">{{ $user->id }}</td>
-                    <td class="border px-4 py-2">{{ $user->name }}</td>
+                    <td class="border px-4 py-2">
+                        {{ $user->id }}
+                    </td>
+                    <td class="border px-4 py-2">
+                        <a href="{{url('groups/user').'/'.$user->id}}">
+
+                            {{ $user->name }}
+                        </a>
+                    </td>
                     <td class="border px-4 py-2">{{ $user->email }}</td>
                     <td class="border px-4 py-2">{{ $user->created_at->diffForHumans() }}</td>
                 </tr>
