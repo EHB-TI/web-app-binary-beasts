@@ -31,6 +31,20 @@ class UserRoleSeeder extends Seeder
         $adminUser->roles()->attach($adminRole);
         $studentUser->roles()->attach($studentRole);
         $teacherUser->roles()->attach($teacherRole);
-        
+
+        // Link factory generated users to student role
+        $factoryStudents = User::whereBetween("id", [4, 54])->get();
+        $factoryTeachers = User::whereBetween("id", [55, 70])->get();
+        $factoryAdmins = User::whereBetween("id", [70, 75])->get();
+
+        foreach($factoryStudents as $factoryUser){
+            $factoryUser->roles()->attach($studentRole);
+        }
+        foreach($factoryTeachers as $factoryUser){
+            $factoryUser->roles()->attach($teacherRole);
+        }
+        foreach($factoryAdmins as $factoryUser){
+            $factoryUser->roles()->attach($adminRole);
+        }
     }
 }

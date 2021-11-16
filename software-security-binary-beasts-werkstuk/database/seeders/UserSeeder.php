@@ -34,5 +34,8 @@ class UserSeeder extends Seeder
             "email" => "teacher@teacher.ehb.be"
         ]);
         $teacher->save();
+
+        // Use the factory class to create a bunch or random profiles
+        User::factory(75)->create();
     }
 }
