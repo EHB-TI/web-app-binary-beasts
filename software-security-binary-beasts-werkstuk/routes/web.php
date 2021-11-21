@@ -22,6 +22,9 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 })->name('dashboard');
 
 Route::resource('events',\App\Http\Controllers\EventsController::class);
+Route::post('events/create',[\App\Http\Controllers\EventsController::class,'createEvent']);
+Route::post('events/accept',[\App\Http\Controllers\EventsController::class,'acceptEvent']);
+
 
 Route::group(['middleware'=>'auth'],function(){
     Route::resource('events',\App\Http\Controllers\EventsController::class);
