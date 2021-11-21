@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Group;
 use Illuminate\Http\Request;
 use App\Models\Event;
+use Illuminate\Support\Facades\Auth;
 
 class EventsController extends Controller
 {
@@ -16,7 +18,7 @@ class EventsController extends Controller
     public function index()
     {
         // Todo: Stuur voorlopig alle events mee
-        $events = Event::orderBy("date", "asc")->get();
+        $events = Event::orderBy("eventdate", "asc")->get();
         return view('events.index', ["events" => $events]);
     }
 
@@ -27,8 +29,32 @@ class EventsController extends Controller
      */
     public function create()
     {
-        //
+        $groups = Auth::user()->groups()->get();
+        return view('events.create',compact('groups'));
     }
+
+
+    public function createEvent(Request $request)
+    {
+        //dd($request->all());
+        $event = new Event;
+        $event->eventname = $request->eventName;
+        $event->eventdescription = $request->eventDescription;
+        $event->eventdate=$request->eventDate;
+        $event->eventTime=$request->eventTime;
+        $event->host_id=Auth::user()->id;
+        $event->save();
+        $event->groups()->attach($request->eventGroup);
+        $events = Event::orderBy("eventdate", "asc")->get();
+        return view('events.index', ["events" => $events]);
+
+    }
+
+    public function acceptEvent(Request $request)
+    {
+        echo($request->event_id);
+    }
+
 
     /**
      * Store a newly created resource in storage.
