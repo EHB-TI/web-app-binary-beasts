@@ -68,6 +68,11 @@ class User extends Authenticatable
         return $this->belongsToMany(Role::class);
     }
 
+    public function events()
+    {
+        return $this->belongsToMany(Event::class);
+    }
+
     public function groups()
     {
         return $this->belongsToMany(Group::class);
@@ -79,7 +84,7 @@ class User extends Authenticatable
     }
 
     public static function search($search){
-        // This static function is used to create the dynamic userstable livewire component
+        // This static function is used to create the dynamic users table livewire component
         // We check if the value is empty first, otherwise we query the db with the input text
         // where and orWhere sanitize inputs so no SQL injection is possible here
         return empty($search) ? static::query()->whereHas("roles", function ($q){
