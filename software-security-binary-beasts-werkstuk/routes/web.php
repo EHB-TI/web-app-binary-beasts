@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GitHubController;
+use App\Http\Controllers\GroupController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\EventsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,13 +27,25 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 Route::resource('events',\App\Http\Controllers\EventsController::class);
 
 Route::group(['middleware'=>'auth'],function(){
-    Route::resource('events',\App\Http\Controllers\EventsController::class);
-    Route::resource('users',\App\Http\Controllers\UserController::class);
-    Route::resource('groups',\App\Http\Controllers\GroupController::class);
-    Route::get("groups/users/{id}", [
-        "uses" => "GroupController@showUser",
-        "as" => "groups.user"
-    ]);
+    Route::resource('events', EventsController::class);
+    Route::resource('users', UserController::class);
+    //Route::resource('groups',\App\Http\Controllers\GroupController::class);
+    Route::get(
+        '/groups',
+        [GroupController::class, 'index']
+    )->name('groups.index');
+    Route::get(
+        '/groups/users/{id}',
+        [GroupController::class, 'showUser']
+    )->name('groups.user');
+    Route::get(
+        '/groups/{id}',
+        [GroupController::class, 'showGroup']
+    )->name('groups.details');
+    Route::post(
+        '/groups/create',
+        [GroupController::class, 'newGroup']
+    )->name('groups.create');
 });
 
 // Github oauth routes

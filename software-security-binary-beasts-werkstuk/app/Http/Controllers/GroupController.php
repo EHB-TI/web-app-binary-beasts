@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\GroupRequest;
 use App\Models\Group;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class GroupController extends Controller
 {
@@ -58,9 +60,10 @@ class GroupController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function showGroup($id)
     {
-        //
+        $group = Group::findOrFail($id);
+        return view("groups.details", ["group" => $group]);
     }
 
     public function showUser($id){
@@ -99,5 +102,15 @@ class GroupController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function newGroup(GroupRequest $request){
+        // Todo: Nieuwe groepsnamen moeten uniek zijn
+        // Momenteel redirecten we gewoon terug ook als er foutmeldingen zijn, bv als naam niet uniek is
+        $newGroup = new Group([
+            "name" => $request->name,
+        ]);
+        $newGroup->admin_id = Auth::id();
+        $newGroup->save();
+        return redirect(route("groups.index"));
     }
 }
