@@ -25,6 +25,8 @@ class GroupSeeder extends Seeder
 
         
         $student = User::find(2);
+        $teacher = User::find(3);
         $testGroup->members()->attach($student);
+        $testGroup->members()->attach($teacher);
     }
 }

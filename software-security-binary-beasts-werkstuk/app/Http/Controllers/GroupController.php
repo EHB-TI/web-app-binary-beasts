@@ -111,6 +111,7 @@ class GroupController extends Controller
         ]);
         $newGroup->admin_id = Auth::id();
         $newGroup->save();
+        $newGroup->members()->attach(Auth::user());
         return redirect(route("groups.index"));
     }
 }

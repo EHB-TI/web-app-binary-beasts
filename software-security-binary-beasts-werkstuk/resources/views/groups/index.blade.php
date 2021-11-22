@@ -9,19 +9,31 @@
 
   @if(Auth::user()->roles()->where("role_name", "TEACHER")->count() == 1)
   <!-- Only teachers can see this part -->
+  <div class="py-6">
+    <div class="max-w-2xl justify-center sm:px-6 lg:px-8">
+      <div class="flex flex-col">
+        <div class="py-2 min-w-full sm:px-3 lg:px-4" style="margin-left: 175px">
+          <x-jet-validation-errors class="mb-4" />
+          <form method="POST" action="{{ route('groups.create' )}}">
+            @csrf
+            <div>
+              <x-jet-label for="name" value="{{ __('Group name') }}" />
+              <x-jet-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required
+                autofocus autocomplete="name" />
+            </div>
+            <div class="flex items-center justify-center mt-4">
+              <x-jet-button class="ml-4">
+                {{ __('Create Group') }}
+              </x-jet-button>
+            </div>
+          </form>
 
-  <form method="post" action="{{ route('groups.create' )}}">
-    <div class="row">
-      <div class="col col-6">
-        <label class="form-control">Name of the new group</label>
-      </div>
-      <div class="col col-6">
-        <input class="form-control" type="text" name="name" value="" />
+        </div>
+
       </div>
     </div>
-    @csrf
-    <button class="btn btn-outline-primary btn-lg" type="submit">Create new group</button>
-  </form>
+  </div>
+
 
   <div class="flex flex-col">
     <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
