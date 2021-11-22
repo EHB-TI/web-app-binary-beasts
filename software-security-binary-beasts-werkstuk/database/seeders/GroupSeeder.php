@@ -19,7 +19,6 @@ class GroupSeeder extends Seeder
         // Creates a testgroup where our seeded Teacher is the admin and the seeded Student is a member
         $testGroup = new Group([
             "name" => "Test group",
-            "date" => Carbon::now(),
             'admin_id' => 3,
         ]);
         $testGroup->save();
