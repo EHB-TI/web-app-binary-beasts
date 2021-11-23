@@ -39,21 +39,7 @@ class GroupController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+    
 
     /**
      * Display the specified resource.
@@ -71,39 +57,7 @@ class GroupController extends Controller
         
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
+    
     public function newGroup(GroupRequest $request){
         $newGroup = new Group([
             "name" => $request->name,
@@ -141,5 +95,40 @@ class GroupController extends Controller
             $group->members()->attach($member);
         }
         return redirect()->back();
+    }
+    public function delete(Request $request){
+        error_log("delete group");
+        $group = Group::findOrFail($request->groupId);
+        error_log(Auth::user());
+        if($group && $group->admin_id === Auth::id()){
+            foreach($group->events as $event){
+                $event->groups()->detach();
+                $event->delete();
+            }
+            $group->delete();
+        }
+        return redirect()->back();
+    }
+    
+    public function edit($id){
+        $group = Group::findOrFail($id);
+        return view("groups.edit", ["group" => $group]);
+    }
+
+    public function postEdit($id, GroupRequest $request){
+        error_log("edit group");
+        error_log($id);
+        error_log(Auth::user());
+        error_log($request->name);
+        $group = Group::findOrFail($id);
+        error_log($group);
+        error_log(Auth::user());
+        if($group && $group->admin_id === Auth::id()){
+            error_log("Editing group name");
+            $group->name = $request->name;
+            $group->save();
+            
+        }
+        return redirect(route("groups.index"));
     }
 }

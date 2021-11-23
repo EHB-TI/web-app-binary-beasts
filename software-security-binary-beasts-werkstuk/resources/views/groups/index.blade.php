@@ -61,8 +61,10 @@
                   Title
                 </th>
                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Date
+                  Members
                 </th>
+                <th></th>
+                <th></th>
               </tr>
             </thead>
             @foreach($admingroups as $group)
@@ -76,7 +78,30 @@
                 </div>
               </td>
               <td class="px-6 py-4 whitespace-nowrap">
-                <div class="text-sm text-gray-900">{{ $group->date }}</div>
+                <div class="text-sm text-gray-900">{{ $group->members()->count() }}</div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm text-gray-900">
+                  <a href="{{ url('groups/edit'). '/' . $group->id }}">Edit
+
+                </div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm text-gray-900">
+
+                  <form method="POST" action="{{route('groups.delete', ['id' => $group->id])}}">
+                    @csrf
+                    <input type="hidden" name="groupId" value="{{ $group->id }}">
+
+                    <div class="flex items-center justify-center mt-4">
+                      <x-jet-button class="ml-4">
+                        Remove
+                      </x-jet-button>
+
+                    </div>
+                  </form>
+
+                </div>
               </td>
             </tr>
             @endforeach
@@ -111,7 +136,7 @@
                   </th>
                   <th scope="col"
                     class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Date
+                    Members
                   </th>
                 </tr>
               </thead>
@@ -127,7 +152,7 @@
                   </div>
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
-                  <div class="text-sm text-gray-900">{{ $group->date }}</div>
+                  <div class="text-sm text-gray-900">{{ $group->members()->count() }}</div>
                 </td>
               </tr>
               @endforeach
@@ -141,57 +166,57 @@
   </div>
   </div>
   @endif
-</x-app-layout>
 
 
 
 
-@foreach($membergroups as $group)
-@if($group->events()->count() > 0)
+  @foreach($membergroups as $group)
+  @if($group->events()->count() > 0)
 
-<div class="py-12">
+  <div class="py-12">
 
-  <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-    <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-      <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-        <table class="min-w-full divide-y divide-gray-200">
-          <thead class="bg-gray-50">
+    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+      <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+        <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+          <table class="min-w-full divide-y divide-gray-200">
+            <thead class="bg-gray-50">
+              <tr>
+                <th colspan=2 scope="col"
+                  class="px-6 py-3 text-center text-xl font-medium text-gray-500 uppercase tracking-wider">
+                  EVENTS for group {{ $group->name }}
+
+                </th>
+              </tr>
+              <tr>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Title
+                </th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Date
+                </th>
+              </tr>
+            </thead>
+            @foreach($group->events as $event)
             <tr>
-              <th colspan=2 scope="col"
-                class="px-6 py-3 text-center text-xl font-medium text-gray-500 uppercase tracking-wider">
-                EVENTS for group {{ $group->name }}
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm text-gray-900">
+                  <a href="{{url('events/') . '/' . $event->id}}">
+                    {{ $event->eventname }}
 
-              </th>
+                  </a>
+                </div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm text-gray-900">{{ $event->eventdate }} - {{ $event->eventtime}}</div>
+              </td>
             </tr>
-            <tr>
-              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Title
-              </th>
-              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Date
-              </th>
-            </tr>
-          </thead>
-          @foreach($group->events as $event)
-          <tr>
-            <td class="px-6 py-4 whitespace-nowrap">
-              <div class="text-sm text-gray-900">
-                <a href="{{url('events/') . '/' . $event->id}}">
-                  {{ $event->eventname }}
-
-                </a>
-              </div>
-            </td>
-            <td class="px-6 py-4 whitespace-nowrap">
-              <div class="text-sm text-gray-900">{{ $event->eventdate }} - {{ $event->eventtime}}</div>
-            </td>
-          </tr>
-          @endforeach
-          </tbody>
-        </table>
+            @endforeach
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </div>
-</div>
-@endif
-@endforeach
+  @endif
+  @endforeach
+</x-app-layout>

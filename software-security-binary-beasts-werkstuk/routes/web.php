@@ -38,6 +38,14 @@ Route::group(['middleware'=>'auth'],function(){
         [GroupController::class, 'index']
     )->name('groups.index');
     Route::get(
+        '/groups/edit/{id}',
+        [GroupController::class, 'edit']
+    )->name('groups.edit');
+    Route::post(
+        '/groups/edit/{id}',
+        [GroupController::class, 'postEdit']
+    )->name('groups.postEdit');
+    Route::get(
         '/groups/users/{id}',
         [GroupController::class, 'showUser']
     )->name('groups.user');
@@ -45,6 +53,10 @@ Route::group(['middleware'=>'auth'],function(){
         '/groups/{id}',
         [GroupController::class, 'showGroup']
     )->name('groups.details');
+    Route::post(
+        '/groups/delete/{id}',
+        [GroupController::class, 'delete']
+    )->name('groups.delete');
     Route::post(
         '/groups/create',
         [GroupController::class, 'newGroup']
