@@ -12,7 +12,6 @@
         <option value="id">ID</option>
         <option value="name">Name</option>
         <option value="email">Email</option>
-        <option value="created_at">Sign Up Date</option>
       </select>
       <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
         <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -52,6 +51,9 @@
   <table class="table-auto w-full mb-6">
     <thead>
       <tr>
+        <th colspan=4 class="px-4 py-2">Group admin: {{ $group->admin->name}}</th>
+      </tr>
+      <tr>
         <th class="px-4 py-2">ID</th>
         <th class="px-4 py-2">Name</th>
         <th class="px-4 py-2">Email</th>
@@ -74,26 +76,26 @@
         <td class="border px-4 py-2">
           @if($group->members->contains($user->id))
           <form method="POST" action="{{route('groups.remove')}}">
-            {{ csrf_field() }}
+            @csrf
             <input type="hidden" name="groupId" value="{{ $group->id }}">
             <input type="hidden" name="memberId" value="{{ $user->id }}">
 
             <div class="flex items-center justify-center mt-4">
               <x-jet-button class="ml-4">
-                {{ __('Remove') }}
+                Remove
               </x-jet-button>
 
             </div>
           </form>
           @else
           <form method="POST" action="{{route('groups.add')}}">
-            {{ csrf_field() }}
+            @csrf
             <input type="hidden" name="groupId" value="{{ $group->id }}">
             <input type="hidden" name="memberId" value="{{ $user->id }}">
 
             <div class="flex items-center justify-center mt-4">
               <x-jet-button class="ml-4">
-                {{ __('Add') }}
+                Add
               </x-jet-button>
 
             </div>

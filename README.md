@@ -13,7 +13,7 @@ We want to build a web application that allows EhB students & teachers to schedu
 - [ ] As a student or teacher I can create/edit/delete an event
 - [ ] As a teacher I can create/edit/delete an event private to a specific group
 - [ ] As a student or teacher I can view a list of all events
-- [ ] As a student I can view a list of all events in my group
+- [x] As a student I can view a list of all events in my group
 - [ ] As a student or teacher I can view the details of an event
 - [ ] As a student or teacher I can see all attendees of an event if I have rights to do so
 - [ ] As a student or teacher I can indicate if I will be attending an event
