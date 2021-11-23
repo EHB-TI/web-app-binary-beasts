@@ -117,7 +117,6 @@ class GroupController extends Controller
         error_log("Remove member function");
         error_log($request->groupId);
         error_log($request->memberId);
-        error_log(json_encode($request));
         
         $group = Group::findOrFail($request->groupId);
         error_log($group->name);
@@ -126,14 +125,13 @@ class GroupController extends Controller
         if($group && $member){
             $group->members()->detach($member);
         }
-        return redirect(route("groups.details", ["id" => $group->id]));
+        return redirect()->back();
     }
     public function addMember(Request $request){
         
         error_log("Add member function");
         error_log($request->groupId);
         error_log($request->memberId);
-        error_log(json_encode($request));
         
         $group = Group::findOrFail($request->groupId);
         error_log($group->name);
@@ -142,6 +140,6 @@ class GroupController extends Controller
         if($group && $member){
             $group->members()->attach($member);
         }
-        return redirect(route("groups.details", ["id" => $group->id]));
+        return redirect()->back();
     }
 }
