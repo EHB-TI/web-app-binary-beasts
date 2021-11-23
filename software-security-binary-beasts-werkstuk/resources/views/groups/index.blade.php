@@ -118,48 +118,44 @@
   @if($membergroups->count() > 0)
   <div class="py-12">
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-      <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-        <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-          <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-            <table class="min-w-full divide-y divide-gray-200">
-              <thead class="bg-gray-50">
-                <tr>
-                  <th scope="col" colspan=2
-                    class="px-6 py-3 text-center text-xl font-medium text-gray-500 uppercase tracking-wider">
-                    Groups where we are member
-                  </th>
-                </tr>
-                <tr>
-                  <th scope="col"
-                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Title
-                  </th>
-                  <th scope="col"
-                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Members
-                  </th>
-                </tr>
-              </thead>
-              <br>
-              @foreach($membergroups as $group)
+      <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+        <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+          <table class="min-w-full divide-y divide-gray-200">
+            <thead class="bg-gray-50">
               <tr>
-                <td class="px-6 py-4 whitespace-nowrap">
-                  <div class="text-sm text-gray-900">
-                    <a href="{{url('groups/') . '/' . $group->id}}">
-                      {{ $group->name }}
-
-                    </a>
-                  </div>
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap">
-                  <div class="text-sm text-gray-900">{{ $group->members()->count() }}</div>
-                </td>
+                <th scope="col" colspan=2
+                  class="px-6 py-3 text-center text-xl font-medium text-gray-500 uppercase tracking-wider">
+                  Groups where we are member
+                </th>
               </tr>
-              @endforeach
-              </tbody>
-            </table>
+              <tr>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Title
+                </th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Members
+                </th>
+              </tr>
+            </thead>
+            <br>
+            @foreach($membergroups as $group)
+            <tr>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm text-gray-900">
+                  <a href="{{url('groups/') . '/' . $group->id}}">
+                    {{ $group->name }}
 
-          </div>
+                  </a>
+                </div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm text-gray-900">{{ $group->members()->count() }}</div>
+              </td>
+            </tr>
+            @endforeach
+            </tbody>
+          </table>
+
         </div>
       </div>
     </div>

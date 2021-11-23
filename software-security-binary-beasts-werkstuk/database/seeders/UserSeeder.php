@@ -22,14 +22,14 @@ class UserSeeder extends Seeder
         $admin->save();
 
         $student = new User([
-            "name" => "student",
+            "name" => "StudentName",
             "password" => bcrypt("Student1"),
             "email" => "student@student.ehb.be"
         ]);
         $student->save();
 
         $teacher = new User([
-            "name" => "teacher",
+            "name" => "TeacherName",
             "password" => bcrypt("Teacher1"),
             "email" => "teacher@teacher.ehb.be"
         ]);

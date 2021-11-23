@@ -19,6 +19,8 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             UserRoleSeeder::class,
             GroupSeeder::class,
+            EventSeeder::class,
+            GroupEventSeeder::class,
         ]
 
     );

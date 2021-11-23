@@ -22,11 +22,17 @@ class GroupSeeder extends Seeder
             'admin_id' => 3,
         ]);
         $testGroup->save();
-
         
         $student = User::find(2);
         $teacher = User::find(3);
-        $testGroup->members()->attach($student);
+        $testGroup->members()->attach($student);        
         $testGroup->members()->attach($teacher);
+
+        // Seed some factory students
+        $factoryStudents = User::whereBetween("id", [10, 34])->get();
+
+        foreach($factoryStudents as $factoryUser){
+            $testGroup->members()->attach($factoryUser);
+        }
     }
 }
