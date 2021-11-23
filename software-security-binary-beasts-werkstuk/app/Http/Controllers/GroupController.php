@@ -116,18 +116,10 @@ class GroupController extends Controller
     }
 
     public function postEdit($id, GroupRequest $request){
-        error_log("edit group");
-        error_log($id);
-        error_log(Auth::user());
-        error_log($request->name);
-        $group = Group::findOrFail($id);
-        error_log($group);
-        error_log(Auth::user());
-        if($group && $group->admin_id === Auth::id()){
-            error_log("Editing group name");
+        $group = Group::findOrFail($id);        
+        if($group && $group->admin_id === Auth::id()){            
             $group->name = $request->name;
-            $group->save();
-            
+            $group->save();            
         }
         return redirect(route("groups.index"));
     }
