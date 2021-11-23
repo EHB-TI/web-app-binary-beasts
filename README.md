@@ -9,7 +9,7 @@ We want to build a web application that allows EhB students & teachers to schedu
 - [x] As a teacher or student I can login/logout
 - [ ] As a teacher I can create/view/edit/delete groups
 - [x] As a teacher I can view all students
-- [ ] As a teacher I can (un)assign students to groups
+- [x] As a teacher I can (un)assign students to groups
 - [ ] As a student or teacher I can create/edit/delete an event
 - [ ] As a teacher I can create/edit/delete an event private to a specific group
 - [ ] As a student or teacher I can view a list of all events

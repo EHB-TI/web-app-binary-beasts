@@ -14,13 +14,14 @@ class UsersTable extends Component
     public $search = '';
     public $orderBy = 'id';
     public $orderAsc = true;
+    public $group;
     
     public function render()
     {
         return view('livewire.users-table', [
             'users' => User::search($this->search)
                 ->orderBy($this->orderBy, $this->orderAsc ? 'asc' : 'desc')
-                ->simplePaginate($this->perPage)
+                ->simplePaginate($this->perPage),
         ]);
     }
 }

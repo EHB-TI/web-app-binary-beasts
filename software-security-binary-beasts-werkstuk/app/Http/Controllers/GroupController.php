@@ -5,13 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\GroupRequest;
 use App\Models\Group;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 
 class GroupController extends Controller
 {
     public function __construct() {
-        //error_log("Group Controller");
+        error_log("Group Controller");
         $this->middleware("isTeacher")->except("index");
     }
 
@@ -104,8 +105,6 @@ class GroupController extends Controller
         //
     }
     public function newGroup(GroupRequest $request){
-        // Todo: Nieuwe groepsnamen moeten uniek zijn
-        // Momenteel redirecten we gewoon terug ook als er foutmeldingen zijn, bv als naam niet uniek is
         $newGroup = new Group([
             "name" => $request->name,
         ]);
@@ -113,5 +112,36 @@ class GroupController extends Controller
         $newGroup->save();
         $newGroup->members()->attach(Auth::user());
         return redirect(route("groups.index"));
+    }
+    public function removeMember(Request $request){
+        error_log("Remove member function");
+        error_log($request->groupId);
+        error_log($request->memberId);
+        error_log(json_encode($request));
+        
+        $group = Group::findOrFail($request->groupId);
+        error_log($group->name);
+        $member = User::findOrFail($request->memberId);
+        error_log($member->name);
+        if($group && $member){
+            $group->members()->detach($member);
+        }
+        return redirect(route("groups.details", ["id" => $group->id]));
+    }
+    public function addMember(Request $request){
+        
+        error_log("Add member function");
+        error_log($request->groupId);
+        error_log($request->memberId);
+        error_log(json_encode($request));
+        
+        $group = Group::findOrFail($request->groupId);
+        error_log($group->name);
+        $member = User::findOrFail($request->memberId);
+        error_log($member->name);
+        if($group && $member){
+            $group->members()->attach($member);
+        }
+        return redirect(route("groups.details", ["id" => $group->id]));
     }
 }

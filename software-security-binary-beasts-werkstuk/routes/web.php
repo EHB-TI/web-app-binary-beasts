@@ -49,6 +49,14 @@ Route::group(['middleware'=>'auth'],function(){
         '/groups/create',
         [GroupController::class, 'newGroup']
     )->name('groups.create');
+    Route::post(
+        '/groups/remove/',
+        [GroupController::class, 'removeMember']
+    )->name('groups.remove');
+    Route::post(
+        '/groups/add/',
+        [GroupController::class, 'addMember']
+    )->name('groups.add');
 });
 
 // Github oauth routes
