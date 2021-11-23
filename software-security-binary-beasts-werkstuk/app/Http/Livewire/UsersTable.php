@@ -15,6 +15,8 @@ class UsersTable extends Component
     public $orderBy = 'id';
     public $orderAsc = true;
     public $group;
+
+    protected $queryString = ["perPage", "search", "orderBy", "orderAsc"];
     
     public function render()
     {
