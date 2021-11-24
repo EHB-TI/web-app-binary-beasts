@@ -24,7 +24,10 @@ class CreateEventRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'eventname' => 'required|min:3',
+            'eventdescription' => "required|min:3",
+            'eventdate' => "required",
+            'eventTime' => "required"
         ];
     }
 }

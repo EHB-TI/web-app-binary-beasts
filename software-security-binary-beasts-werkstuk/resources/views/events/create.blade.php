@@ -27,7 +27,7 @@
 
             <div class="mt-4">
               <x-jet-label for="eventDate" value="{{ __('Date') }}" />
-              <input id="eventDate" type="text" name="eventDate"
+              <input id="eventDate" type="text" name="eventDate" required
                 class="form-control datepicker border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
             </div>
 
@@ -40,17 +40,17 @@
             <div class="mt-4">
               <x-jet-label for="eventGroup" value="{{ __('Group') }}" />
               <select id="eventGroup" name="eventGroup" name="eventGroup"
-                class=" form-control custom-select border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
+                class="appearance-none form-control custom-select border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
                 style="width: 210px;height: 45px">
-                <option value="">Public</option>
+                <option value="">No group (public)</option>
                 @foreach($groups as $group)
                 <option class="form-control" value="{{ $group->id }}">{{ $group->name }}</option>
                 @endforeach
               </select>
 
-              @endif
-
             </div>
+            @endif
+
             <div class="flex items-center justify-center mt-4">
               <x-jet-button class="ml-4">
                 {{ __('Create Event') }}
