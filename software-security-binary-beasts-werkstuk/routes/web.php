@@ -17,7 +17,7 @@ use App\Http\Controllers\EventsController;
 |
 */
 
-Route::get('/',[App\Http\Controllers\HomeController::class,'redirect']);
+Route::get('/',[App\Http\Controllers\HomeController::class,'redirect'])->name("index");
 
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {

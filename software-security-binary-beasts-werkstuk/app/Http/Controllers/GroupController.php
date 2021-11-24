@@ -13,7 +13,7 @@ class GroupController extends Controller
 {
     public function __construct() {
         error_log("Group Controller");
-        $this->middleware("isTeacher")->except("index");
+        $this->middleware("isTeacher")->except("index", "showGroup");
     }
 
     /**
@@ -23,24 +23,10 @@ class GroupController extends Controller
      */
     public function index()
     {
-        // We only show groups where the user is the admin 
-
-        // Todo: also show groups where the user is not just an admin and merge the two or return multiple items
-
         $membergroups = Auth::user()->groups;
-        //error_log(Auth::id());
-        //error_log(json_encode($groups));
         $admingroups = Group::where("admin_id", Auth::id())->get();
         return view('groups.index', ["membergroups" => $membergroups, "admingroups" => $admingroups]);
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    
-
     /**
      * Display the specified resource.
      *
@@ -50,7 +36,15 @@ class GroupController extends Controller
     public function showGroup($id)
     {
         $group = Group::findOrFail($id);
-        return view("groups.details", ["group" => $group]);
+        error_log(json_encode($group->members));
+        error_log(json_encode($group->admin));
+        error_log($group->members->contains(Auth::user()));
+        error_log($group->admin_id == Auth::id());
+        if($group->members->contains(Auth::user()) || $group->admin_id == Auth::id()){
+
+            return view("groups.details", ["group" => $group]);
+        }
+        return view("dashboard");
     }
 
     public function showUser($id){
