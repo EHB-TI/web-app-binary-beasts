@@ -67,10 +67,11 @@
           {{ $user->id }}
         </td>
         <td class="border px-4 py-2">
-          <a href="{{url('groups/user').'/'.$user->id}}">
+          <!-- <a href="{{url('groups/user').'/'.$user->id}}">
 
-            {{ $user->name }}
-          </a>
+              {{ $user->name }}
+            </a> -->
+          {{ $user->name }}
         </td>
         <td class="border px-4 py-2">{{ $user->email }}</td>
         <td class="border px-4 py-2">
