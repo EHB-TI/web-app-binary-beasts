@@ -24,11 +24,33 @@
       </ul>
       {{$event->attendees()->count()}}
       @if($canSeeAttendees)
+      <h1>People that will be attending:</h1>
       <ul>
         @foreach($event->attendees as $attendee)
         <li>{{$attendee->name}}</li>
         @endforeach
       </ul>
+      @endif
+      @if($event->attendees->contains(Auth::user()))
+      <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+        <form method="POST" action="{{ url('events/reject') }}">
+          <input type="hidden" name="event_id" value="{{ $event->id }}">
+          {!! csrf_field() !!}
+          <x-jet-button class="ml-4">
+            Stop attending
+          </x-jet-button>
+        </form>
+      </td>
+      @else
+      <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+        <form method="POST" action="{{ url('events/accept') }}">
+          <input type="hidden" name="event_id" value="{{ $event->id }}">
+          {!! csrf_field() !!}
+          <x-jet-button class="ml-4">
+            Attend
+          </x-jet-button>
+        </form>
+      </td>
       @endif
     </div>
   </div>

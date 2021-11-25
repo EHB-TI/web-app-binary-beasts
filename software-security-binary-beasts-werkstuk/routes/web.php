@@ -28,48 +28,50 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 Route::resource('events',\App\Http\Controllers\EventsController::class);
 Route::post('events/create',[\App\Http\Controllers\EventsController::class,'createEvent']);
 Route::post('events/accept',[\App\Http\Controllers\EventsController::class,'acceptEvent']);
+Route::post('events/reject',[\App\Http\Controllers\EventsController::class,'rejectEvent']);
 
 
 Route::group(['middleware'=>'auth'],function(){
     Route::resource('events', EventsController::class);
     Route::resource('users', UserController::class);
-    //Route::resource('groups',\App\Http\Controllers\GroupController::class);
-    Route::get(
-        '/groups',
-        [GroupController::class, 'index']
-    )->name('groups.index');
-    Route::get(
-        '/groups/edit/{id}',
-        [GroupController::class, 'edit']
-    )->name('groups.edit');
-    Route::post(
-        '/groups/edit/{id}',
-        [GroupController::class, 'postEdit']
-    )->name('groups.postEdit');
-    Route::get(
-        '/groups/users/{id}',
-        [GroupController::class, 'showUser']
-    )->name('groups.user');
-    Route::get(
-        '/groups/{id}',
-        [GroupController::class, 'showGroup']
-    )->name('groups.details');
-    Route::post(
-        '/groups/delete/{id}',
-        [GroupController::class, 'delete']
-    )->name('groups.delete');
-    Route::post(
-        '/groups/create',
-        [GroupController::class, 'newGroup']
-    )->name('groups.create');
-    Route::post(
-        '/groups/remove/',
-        [GroupController::class, 'removeMember']
-    )->name('groups.remove');
-    Route::post(
-        '/groups/add/',
-        [GroupController::class, 'addMember']
-    )->name('groups.add');
+    Route::prefix('groups')->group(function () {
+        Route::get(
+            '/',
+            [GroupController::class, 'index']
+        )->name('groups.index');
+        Route::get(
+            '/edit/{id}',
+            [GroupController::class, 'edit']
+        )->name('groups.edit');
+        Route::post(
+            '/edit/{id}',
+            [GroupController::class, 'postEdit']
+        )->name('groups.postEdit');
+        Route::get(
+            '/users/{id}',
+            [GroupController::class, 'showUser']
+        )->name('groups.user');
+        Route::get(
+            '/{id}',
+            [GroupController::class, 'showGroup']
+        )->name('groups.details');
+        Route::post(
+            '/delete/{id}',
+            [GroupController::class, 'delete']
+        )->name('groups.delete');
+        Route::post(
+            '/create',
+            [GroupController::class, 'newGroup']
+        )->name('groups.create');
+        Route::post(
+            '/remove/',
+            [GroupController::class, 'removeMember']
+        )->name('groups.remove');
+        Route::post(
+            '/add/',
+            [GroupController::class, 'addMember']
+        )->name('groups.add');
+    });
 });
 
 // Admin routes

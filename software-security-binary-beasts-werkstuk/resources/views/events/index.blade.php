@@ -81,15 +81,27 @@
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                       {{ $event->attendees()->count() }}
                     </td>
+                    @if($event->attendees->contains(Auth::user()))
+                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                      <form method="POST" action="{{ url('events/reject') }}">
+                        <input type="hidden" name="event_id" value="{{ $event->id }}">
+                        {!! csrf_field() !!}
+                        <x-jet-button class="ml-4">
+                          Stop attending
+                        </x-jet-button>
+                      </form>
+                    </td>
+                    @else
                     <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                       <form method="POST" action="{{ url('events/accept') }}">
                         <input type="hidden" name="event_id" value="{{ $event->id }}">
                         {!! csrf_field() !!}
-                        <button type="submit" class="btn">
-                          Accept
-                        </button>
+                        <x-jet-button class="ml-4">
+                          Attend
+                        </x-jet-button>
                       </form>
                     </td>
+                    @endif
                   </tr>
 
                   @endforeach

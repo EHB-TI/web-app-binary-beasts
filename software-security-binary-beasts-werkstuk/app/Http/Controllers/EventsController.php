@@ -53,6 +53,14 @@ class EventsController extends Controller
     public function acceptEvent(Request $request)
     {
         echo($request->event_id);
+        $event = Event::findOrFail($request->event_id);
+        $event->attendees()->attach(Auth::user());
+        return redirect()->back();
+    }
+    public function rejectEvent(Request $request){
+        $event = Event::findOrFail($request->event_id);
+        $event->attendees()->detach(Auth::user());
+        return redirect()->back();
     }
 
 
