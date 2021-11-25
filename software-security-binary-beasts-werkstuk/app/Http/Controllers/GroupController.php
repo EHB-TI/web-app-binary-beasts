@@ -13,6 +13,7 @@ class GroupController extends Controller
 {
     public function __construct() {
         error_log("Group Controller");
+        $this->middleware("auth");
         $this->middleware("isTeacher")->except("index", "showGroup");
     }
 
@@ -35,22 +36,13 @@ class GroupController extends Controller
      */
     public function showGroup($id)
     {
-        $group = Group::findOrFail($id);
-        error_log(json_encode($group->members));
-        error_log(json_encode($group->admin));
-        error_log($group->members->contains(Auth::user()));
-        error_log($group->admin_id == Auth::id());
         if($group->members->contains(Auth::user()) || $group->admin_id == Auth::id()){
-
+            
+            $group = Group::findOrFail($id);
             return view("groups.details", ["group" => $group]);
         }
-        return view("dashboard");
+        return redirect()->back();
     }
-
-    public function showUser($id){
-        
-    }
-
     
     public function newGroup(GroupRequest $request){
         $newGroup = new Group([
@@ -62,38 +54,23 @@ class GroupController extends Controller
         return redirect(route("groups.index"));
     }
     public function removeMember(Request $request){
-        error_log("Remove member function");
-        error_log($request->groupId);
-        error_log($request->memberId);
-        
         $group = Group::findOrFail($request->groupId);
-        error_log($group->name);
         $member = User::findOrFail($request->memberId);
-        error_log($member->name);
         if($group && $member){
             $group->members()->detach($member);
         }
         return redirect()->back();
     }
-    public function addMember(Request $request){
-        
-        error_log("Add member function");
-        error_log($request->groupId);
-        error_log($request->memberId);
-        
+    public function addMember(Request $request){        
         $group = Group::findOrFail($request->groupId);
-        error_log($group->name);
         $member = User::findOrFail($request->memberId);
-        error_log($member->name);
         if($group && $member){
             $group->members()->attach($member);
         }
         return redirect()->back();
     }
     public function delete(Request $request){
-        error_log("delete group");
         $group = Group::findOrFail($request->groupId);
-        error_log(Auth::user());
         if($group && $group->admin_id === Auth::id()){
             foreach($group->events as $event){
                 $event->groups()->detach();
