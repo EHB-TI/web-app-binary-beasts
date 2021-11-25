@@ -103,6 +103,6 @@ class User extends Authenticatable
             })
             ->orWhere('email', 'like', '%'.$search.'%')->whereHas("roles", function ($q){
                 $q->where("role_name", "STUDENT");
-            });       ->orWhere('email', 'like', '%'.$search.'%');
+            });
     }
 }
