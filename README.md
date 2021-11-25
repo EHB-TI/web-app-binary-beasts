@@ -12,11 +12,11 @@ We want to build a web application that allows EhB students & teachers to schedu
 - [x] As a teacher I can (un)assign students to groups
 - [ ] As a student or teacher I can create/edit/delete an event
 - [ ] As a student or teacher I can create/edit/delete an event private to a specific group
-- [ ] As a student or teacher I can view a list of all events
+- [x] As a student or teacher I can view a list of all events
 - [x] As a student I can view a list of all events in my group
-- [ ] As a student or teacher I can view the details of an event
-- [ ] As a student or teacher I can see all attendees of an event if I have rights to do so
-- [ ] As a student or teacher I can indicate if I will be attending an event
+- [x] As a student or teacher I can view the details of an event
+- [x] As a student or teacher I can see all attendees of an event if I have rights to do so
+- [x] As a student or teacher I can indicate if I will be attending an event
 - [x] As an admin I can assign roles to other users (Student, Teacher, Admin)
 
 # Threat model
