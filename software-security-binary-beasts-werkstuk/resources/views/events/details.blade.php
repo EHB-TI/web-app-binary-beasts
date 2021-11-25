@@ -2,10 +2,10 @@
 
   <div class="flex flex-col">
     <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-
-      <h2>
+      @if($event)
+      <h1>
         Name: {{ $event->eventname }}
-      </h2>
+      </h1>
       <h2>
         Description: {{ $event->eventdescription }}
       </h2>
@@ -29,6 +29,7 @@
       </ul>
     </div>
   </div>
+  @endif
 
 
 

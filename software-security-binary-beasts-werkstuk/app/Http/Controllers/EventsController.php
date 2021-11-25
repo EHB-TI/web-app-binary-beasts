@@ -75,9 +75,41 @@ class EventsController extends Controller
      */
     public function show($id)
     {
-        $event = Event::where("id", $id)->get();
-        return $event;
-        return view("events.details", ["event" => $event]);
+        $event = Event::with("attendees", "groups.members")->where("id", $id)->first();
+        $isGroupEvent = $event->groups()->count() > 0;
+        
+        // We only show the list of other attendees if the user is a teacher 
+        // or if the event belongs to a group where the user is a member
+        if(Auth::user()->roles()->where("role_name", "TEACHER")->count() > 0){
+            error_log("User is a teacher");
+            // User is a teacher so we can give all the info
+            return view("events.details", ["event" => $event]);
+        }
+        else{
+            // User is not a teacher
+            error_log("User is not a teacher");
+            foreach($event->groups as $group){
+                error_log($group->name);
+                if($group->members->contains(Auth::user())){
+                    error_log("User is a group member!");
+                    return view("events.details", ["event" => $event]);
+                }
+            }
+            // User isn't a Teacher and isn't a member of a group attached to the event
+            if(!$isGroupEvent){
+                // If the event is public, everybody can see the details
+                // but only teachers can see attendees
+                error_log("The event is public");
+                $eventWithoutAttendees = Event::without("attendees")->where("id", $id)->first();
+                return view("events.details", ["event" => $eventWithoutAttendees]);
+                
+            }
+            else{
+                // The event is not public and the user is not associated with it, he can't get any info
+                error_log("Is group event and user has no access");
+                return redirect(route("dashboard"));    
+            }
+        }
     }
 
     /**
