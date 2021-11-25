@@ -103,10 +103,6 @@ class User extends Authenticatable
             })
             ->orWhere('email', 'like', '%'.$search.'%')->whereHas("roles", function ($q){
                 $q->where("role_name", "STUDENT");
-            });
-        // return empty($search) ? static::query()
-        //     : static::query()->where('id', 'like', '%'.$search.'%')
-        //         ->orWhere('name', 'like', '%'.$search.'%')
-        //         ->orWhere('email', 'like', '%'.$search.'%');
+            });       ->orWhere('email', 'like', '%'.$search.'%');
     }
 }
