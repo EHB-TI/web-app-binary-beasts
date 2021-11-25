@@ -36,9 +36,9 @@ class GroupController extends Controller
      */
     public function showGroup($id)
     {
+        $group = Group::findOrFail($id);
         if($group->members->contains(Auth::user()) || $group->admin_id == Auth::id()){
             
-            $group = Group::findOrFail($id);
             return view("groups.details", ["group" => $group]);
         }
         return redirect()->back();

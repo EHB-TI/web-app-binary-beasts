@@ -20,6 +20,6 @@ class IsTeacher
         if(Auth::user() && Auth::user()->roles()->where("role_name", "TEACHER")->count() == 1){
             return $next($request);
         }
-        return response("Not a teacher", 401);
+        return redirect()->back();
     }
 }

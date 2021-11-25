@@ -5,6 +5,7 @@ use App\Http\Controllers\GitHubController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\EventsController;
+use App\Http\Controllers\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -69,6 +70,17 @@ Route::group(['middleware'=>'auth'],function(){
         '/groups/add/',
         [GroupController::class, 'addMember']
     )->name('groups.add');
+});
+
+// Admin routes
+Route::prefix('admin')->group(function () {
+    Route::get("/", [AdminController::class, "index"])->name("admin.index");
+    Route::post("/addAdmin", [AdminController::class, "addAdmin"])->name("admin.addAdmin");
+    Route::post("/removeAdmin", [AdminController::class, "removeAdmin"])->name("admin.removeAdmin");
+    Route::post("/addTeacher", [AdminController::class, "addTeacher"])->name("admin.addTeacher");
+    Route::post("/removeTeacher", [AdminController::class, "removeTeacher"])->name("admin.removeTeacher");
+    Route::post("/addStudent", [AdminController::class, "addStudent"])->name("admin.addStudent");
+    Route::post("/removeStudent", [AdminController::class, "removeStudent"])->name("admin.removeStudent");
 });
 
 // Github oauth routes
