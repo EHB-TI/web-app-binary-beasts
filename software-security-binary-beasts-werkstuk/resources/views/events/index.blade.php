@@ -66,8 +66,10 @@
                       </div>
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap">
-                      <div class="text-sm text-gray-900">{{ $event->eventname }}</div>
-                      <div class="text-sm text-gray-500">{{ $event->eventdescription }}</div>
+                      <a href="{{ route('events.show', ['event' => $event->id]) }}">
+                        <div class="text-sm text-gray-900">{{ $event->eventname }}</div>
+                        <div class="text-sm text-gray-500">{{ $event->eventdescription }}</div>
+                      </a>
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap">
                       <span
@@ -77,7 +79,7 @@
                       </span>
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      {{ count(array($event->attendees())) }}
+                      {{ $event->attendees()->count() }}
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                       <form method="POST" action="{{ url('events/accept') }}">

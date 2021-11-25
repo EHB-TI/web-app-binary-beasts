@@ -17,8 +17,8 @@ class EventsController extends Controller
      */
     public function index()
     {
-        // Todo: Stuur voorlopig alle events mee
-        $events = Event::orderBy("eventdate", "asc")->get();
+        // Only show public events on the events page
+        $events = Event::doesntHave("groups")->orderBy("eventdate", "asc")->get();
         return view('events.index', ["events" => $events]);
     }
 
