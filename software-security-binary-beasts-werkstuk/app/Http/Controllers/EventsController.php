@@ -80,7 +80,7 @@ class EventsController extends Controller
     {
         $event = Event::findOrFail($request->event_id);
         $event->attendees()->attach(Auth::user());
-        return redirect()->route('events.index');
+        return redirect()->back();
     }
     public function rejectEvent(Request $request){
         $event = Event::findOrFail($request->event_id);
