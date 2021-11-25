@@ -21,21 +21,16 @@ class EventsController extends Controller
         // Only show public events on the events page
         $userid=Auth::user()->id;
         $events = Event::doesntHave("groups")->orderBy("eventdate", "asc")->get();
-        $events2 = Event::join('event_group','events.id','=','event_group.event_id')
+
+        $privateEventsIds = Event::join('event_group','events.id','=','event_group.event_id')
             ->join('groups','event_group.group_id','=','groups.id')
             ->join('group_user','groups.id','=','group_user.group_id')
-            ->join('users','group_user.user_id','=','users.id')
-            ->where('users.id',$userid)->get();
+            ->where('group_user.user_id',$userid)
+            ->select('events.id')->get();
 
-        $TempPrivateEvents = Event::join('event_group','events.id','=','event_group.event_id')
-            ->join('groups','event_group.group_id','=','groups.id')
-            ->join('group_user','groups.id','=','group_user.group_id')
-            ->where('group_user.user_id',$userid)->get();
+        $privateEvents =Event::whereIn('id', $privateEventsIds)->orderBy("eventdate", "asc")->get();
 
-        $PrivateEvents = Event::hydrate($TempPrivateEvents->toArray());
-
-
-        return view('events.index',compact('events','PrivateEvents'));
+        return view('events.index',compact('events','privateEvents'));
 
     }
 
@@ -67,15 +62,17 @@ class EventsController extends Controller
         // public events
         $events = Event::doesntHave("groups")->orderBy("eventdate", "asc")->get();
 
-        $TempPrivateEvents = Event::join('event_group','events.id','=','event_group.event_id')
+        $privateEventsIds = Event::join('event_group','events.id','=','event_group.event_id')
             ->join('groups','event_group.group_id','=','groups.id')
             ->join('group_user','groups.id','=','group_user.group_id')
-            ->where('group_user.user_id',$userid)->get();
+            ->where('group_user.user_id',$userid)
+            ->select('events.id')->get();
 
-        $PrivateEvents = Event::hydrate($TempPrivateEvents->toArray());
+
+        $privateEvents =Event::whereIn('id', $privateEventsIds)->orderBy("eventdate", "asc")->get();
 
 
-        return view('events.index',compact('events','PrivateEvents'));
+        return view('events.index',compact('events','privateEvents'));
 
     }
 
