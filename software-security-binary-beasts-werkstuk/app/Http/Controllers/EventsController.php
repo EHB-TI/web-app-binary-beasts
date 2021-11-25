@@ -83,7 +83,7 @@ class EventsController extends Controller
         if(Auth::user()->roles()->where("role_name", "TEACHER")->count() > 0){
             error_log("User is a teacher");
             // User is a teacher so we can give all the info
-            return view("events.details", ["event" => $event]);
+            return view("events.details", ["event" => $event, "canSeeAttendees" => true]);
         }
         else{
             // User is not a teacher
@@ -92,7 +92,7 @@ class EventsController extends Controller
                 error_log($group->name);
                 if($group->members->contains(Auth::user())){
                     error_log("User is a group member!");
-                    return view("events.details", ["event" => $event]);
+                    return view("events.details", ["event" => $event, "canSeeAttendees" => true]);
                 }
             }
             // User isn't a Teacher and isn't a member of a group attached to the event
@@ -101,7 +101,8 @@ class EventsController extends Controller
                 // but only teachers can see attendees
                 error_log("The event is public");
                 $eventWithoutAttendees = Event::without("attendees")->where("id", $id)->first();
-                return view("events.details", ["event" => $eventWithoutAttendees]);
+                
+                return view("events.details", ["event" => $eventWithoutAttendees, "canSeeAttendees" => false]);
                 
             }
             else{

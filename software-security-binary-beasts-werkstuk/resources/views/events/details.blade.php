@@ -22,11 +22,14 @@
         @endforeach
 
       </ul>
+      {{$event->attendees()->count()}}
+      @if($canSeeAttendees)
       <ul>
         @foreach($event->attendees as $attendee)
         <li>{{$attendee->name}}</li>
         @endforeach
       </ul>
+      @endif
     </div>
   </div>
   @endif
