@@ -6,6 +6,7 @@ use App\Models\Group;
 use Illuminate\Http\Request;
 use App\Models\Event;
 use Illuminate\Support\Facades\Auth;
+use mysql_xdevapi\Schema;
 
 class EventsController extends Controller
 {
@@ -18,8 +19,24 @@ class EventsController extends Controller
     public function index()
     {
         // Only show public events on the events page
+        $userid=Auth::user()->id;
         $events = Event::doesntHave("groups")->orderBy("eventdate", "asc")->get();
-        return view('events.index', ["events" => $events]);
+        $events2 = Event::join('event_group','events.id','=','event_group.event_id')
+            ->join('groups','event_group.group_id','=','groups.id')
+            ->join('group_user','groups.id','=','group_user.group_id')
+            ->join('users','group_user.user_id','=','users.id')
+            ->where('users.id',$userid)->get();
+
+        $TempPrivateEvents = Event::join('event_group','events.id','=','event_group.event_id')
+            ->join('groups','event_group.group_id','=','groups.id')
+            ->join('group_user','groups.id','=','group_user.group_id')
+            ->where('group_user.user_id',$userid)->get();
+
+        $PrivateEvents = Event::hydrate($TempPrivateEvents->toArray());
+
+
+        return view('events.index',compact('events','PrivateEvents'));
+
     }
 
     /**
@@ -36,7 +53,7 @@ class EventsController extends Controller
 
     public function createEvent(Request $request)
     {
-        //dd($request->all());
+
         $event = new Event;
         $event->eventname = $request->eventName;
         $event->eventdescription = $request->eventDescription;
@@ -45,8 +62,15 @@ class EventsController extends Controller
         $event->host_id=Auth::user()->id;
         $event->save();
         $event->groups()->attach($request->eventGroup);
-        $events = Event::orderBy("eventdate", "asc")->get();
-        return view('events.index', ["events" => $events]);
+
+        $userid=Auth::user()->id;
+        $events = Event::doesntHave("groups")->orderBy("eventdate", "asc")->get();
+        $TempPrivateEvents = Event::join('event_group','events.id','=','event_group.event_id')
+            ->join('groups','event_group.group_id','=','groups.id')
+            ->join('group_user','groups.id','=','group_user.group_id')
+            ->where('group_user.user_id',$userid)->get();
+        $PrivateEvents = Event::hydrate($TempPrivateEvents->toArray());
+        return view('events.index',compact('events','PrivateEvents'));
 
     }
 
@@ -58,6 +82,12 @@ class EventsController extends Controller
         return redirect()->back();
     }
     public function rejectEvent(Request $request){
+        $event = Event::findOrFail($request->event_id);
+        $event->attendees()->detach(Auth::user());
+        return redirect()->back();
+    }
+
+    public function deleteEvent(Request $request){
         $event = Event::findOrFail($request->event_id);
         $event->attendees()->detach(Auth::user());
         return redirect()->back();
@@ -85,8 +115,8 @@ class EventsController extends Controller
     {
         $event = Event::with("attendees", "groups.members")->where("id", $id)->first();
         $isGroupEvent = $event->groups()->count() > 0;
-        
-        // We only show the list of other attendees if the user is a teacher 
+
+        // We only show the list of other attendees if the user is a teacher
         // or if the event belongs to a group where the user is a member
         if(Auth::user()->roles()->where("role_name", "TEACHER")->count() > 0){
             error_log("User is a teacher");
@@ -109,14 +139,14 @@ class EventsController extends Controller
                 // but only teachers can see attendees
                 error_log("The event is public");
                 $eventWithoutAttendees = Event::without("attendees")->where("id", $id)->first();
-                
+
                 return view("events.details", ["event" => $eventWithoutAttendees, "canSeeAttendees" => false]);
-                
+
             }
             else{
                 // The event is not public and the user is not associated with it, he can't get any info
                 error_log("Is group event and user has no access");
-                return redirect(route("dashboard"));    
+                return redirect(route("dashboard"));
             }
         }
     }
