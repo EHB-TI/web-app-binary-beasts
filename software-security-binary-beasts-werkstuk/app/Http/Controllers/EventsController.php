@@ -7,10 +7,16 @@ use Illuminate\Http\Request;
 use App\Models\Event;
 use Illuminate\Support\Facades\Auth;
 use mysql_xdevapi\Schema;
+use App\Http\Requests\CreateEventRequest;
+use App\Http\Requests\UpdateEventRequest;
 
 class EventsController extends Controller
 {
 
+    public function __construct() {
+        error_log("Event Controller");
+        $this->middleware("auth");
+    }
     /**
      * Display a listing of the resource.
      *
@@ -18,6 +24,7 @@ class EventsController extends Controller
      */
     public function index()
     {
+        error_log("show event index");
         // Only show public events on the events page
         $userid=Auth::user()->id;
         $events = Event::doesntHave("groups")->orderBy("eventdate", "asc")->get();
@@ -41,14 +48,16 @@ class EventsController extends Controller
      */
     public function create()
     {
+        error_log("create event view");
         $groups = Auth::user()->groups()->get();
         return view('events.create',compact('groups'));
     }
+    
 
 
-    public function createEvent(Request $request)
+    public function createEvent(CreateEventRequest $request)
     {
-
+        error_log("create event");
         $event = new Event;
         $event->eventname = $request->eventName;
         $event->eventdescription = $request->eventDescription;
@@ -75,24 +84,28 @@ class EventsController extends Controller
         return view('events.index',compact('events','privateEvents'));
 
     }
+    
 
     public function acceptEvent(Request $request)
     {
+        error_log("accept event");
         $event = Event::findOrFail($request->event_id);
         $event->attendees()->attach(Auth::user());
         return redirect()->back();
     }
     public function rejectEvent(Request $request){
+        error_log("reject event");
         $event = Event::findOrFail($request->event_id);
         $event->attendees()->detach(Auth::user());
         return redirect()->back();
     }
 
     public function deleteEvent(Request $request){
-       echo($request->event_id);
-       if(Auth::user()->id == $request->host_id) {
-          Event::findorfail($request->event_id)->delete();
-       }
+        error_log("delete event");
+        echo($request->event_id);
+        if(Auth::user()->id == $request->host_id) {
+            Event::findorfail($request->event_id)->delete();
+        }
         return redirect()->route('events.index');
     }
 
@@ -105,7 +118,8 @@ class EventsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        error_log("Store request");
+        
     }
 
     /**
@@ -116,6 +130,7 @@ class EventsController extends Controller
      */
     public function show($id)
     {
+        error_log("Show event");
         $event = Event::with("attendees", "groups.members")->where("id", $id)->first();
         $isGroupEvent = $event->groups()->count() > 0;
 
@@ -153,6 +168,7 @@ class EventsController extends Controller
             }
         }
     }
+    
 
     /**
      * Show the form for editing the specified resource.
@@ -162,7 +178,11 @@ class EventsController extends Controller
      */
     public function edit($id)
     {
-        //
+    //     error_log("edit event view");
+    //     $event = Event::findOrFail($id);
+    //     $groups = Auth::user()->groups()->get();
+    //     return view('events.edit',compact('event', 'groups'));
+    // 
     }
 
     /**
@@ -172,10 +192,7 @@ class EventsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        //
-    }
+    
 
     /**
      * Remove the specified resource from storage.

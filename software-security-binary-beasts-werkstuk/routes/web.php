@@ -25,11 +25,20 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
 
-Route::resource('events',\App\Http\Controllers\EventsController::class);
-Route::post('events/create',[\App\Http\Controllers\EventsController::class,'createEvent']);
-Route::post('events/accept',[\App\Http\Controllers\EventsController::class,'acceptEvent']);
-Route::post('events/reject',[\App\Http\Controllers\EventsController::class,'rejectEvent']);
-Route::post('events/delete',[\App\Http\Controllers\EventsController::class,'deleteEvent']);
+// Route::resource('events',\App\Http\Controllers\EventsController::class);
+Route::prefix("events")->group(function(){
+
+    Route::get('/',[\App\Http\Controllers\EventsController::class,'index']);
+    Route::get('/{id}',[\App\Http\Controllers\EventsController::class,'show']);
+    Route::get('create',[\App\Http\Controllers\EventsController::class,'create']);
+    
+    Route::post('create',[\App\Http\Controllers\EventsController::class,'createEvent']);
+    Route::post('accept',[\App\Http\Controllers\EventsController::class,'acceptEvent']);
+    Route::post('reject',[\App\Http\Controllers\EventsController::class,'rejectEvent']);
+    Route::post('delete',[\App\Http\Controllers\EventsController::class,'deleteEvent']);
+
+});
+
 
 
 Route::group(['middleware'=>'auth'],function(){

@@ -13,7 +13,7 @@ class CreateEventRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,9 +24,9 @@ class CreateEventRequest extends FormRequest
     public function rules()
     {
         return [
-            'eventname' => 'required|min:3',
-            'eventdescription' => "required|min:3",
-            'eventdate' => "required",
+            'eventName' => 'required|min:3',
+            'eventDescription' => "required|min:3",
+            'eventDate' => "required",
             'eventTime' => "required"
         ];
     }
