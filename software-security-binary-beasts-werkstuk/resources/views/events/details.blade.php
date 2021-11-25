@@ -52,6 +52,19 @@
         </form>
       </td>
       @endif
+        <br>
+            @if(auth()->user()->id == $event->host_id)
+            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                <form method="POST" action="{{ url('events/delete') }}">
+                    <input type="hidden" name="event_id" value="{{ $event->id }}">
+                    <input type="hidden" name="host_id" value="{{$event->host_id }}">
+                    {!! csrf_field() !!}
+                    <x-jet-button class="ml-4">
+                        Delete
+                    </x-jet-button>
+                </form>
+            </td>
+            @endif
     </div>
   </div>
   @endif

@@ -64,22 +64,26 @@ class EventsController extends Controller
         $event->groups()->attach($request->eventGroup);
 
         $userid=Auth::user()->id;
+        // public events
         $events = Event::doesntHave("groups")->orderBy("eventdate", "asc")->get();
+
         $TempPrivateEvents = Event::join('event_group','events.id','=','event_group.event_id')
             ->join('groups','event_group.group_id','=','groups.id')
             ->join('group_user','groups.id','=','group_user.group_id')
             ->where('group_user.user_id',$userid)->get();
+
         $PrivateEvents = Event::hydrate($TempPrivateEvents->toArray());
+
+
         return view('events.index',compact('events','PrivateEvents'));
 
     }
 
     public function acceptEvent(Request $request)
     {
-        echo($request->event_id);
         $event = Event::findOrFail($request->event_id);
         $event->attendees()->attach(Auth::user());
-        return redirect()->back();
+        return redirect()->route('events.index');
     }
     public function rejectEvent(Request $request){
         $event = Event::findOrFail($request->event_id);
@@ -88,9 +92,11 @@ class EventsController extends Controller
     }
 
     public function deleteEvent(Request $request){
-        $event = Event::findOrFail($request->event_id);
-        $event->attendees()->detach(Auth::user());
-        return redirect()->back();
+       echo($request->event_id);
+       if(Auth::user()->id == $request->host_id) {
+          Event::findorfail($request->event_id)->delete();
+       }
+        return redirect()->route('events.index');
     }
 
 

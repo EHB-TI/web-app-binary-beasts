@@ -29,6 +29,7 @@ Route::resource('events',\App\Http\Controllers\EventsController::class);
 Route::post('events/create',[\App\Http\Controllers\EventsController::class,'createEvent']);
 Route::post('events/accept',[\App\Http\Controllers\EventsController::class,'acceptEvent']);
 Route::post('events/reject',[\App\Http\Controllers\EventsController::class,'rejectEvent']);
+Route::post('events/delete',[\App\Http\Controllers\EventsController::class,'deleteEvent']);
 
 
 Route::group(['middleware'=>'auth'],function(){

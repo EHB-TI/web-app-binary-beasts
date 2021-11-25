@@ -70,7 +70,7 @@
                               </div>
                           </td>
                           <td class="px-6 py-4 whitespace-nowrap">
-                              <a href="{{ route('events.show', ['event' => $event->id]) }}">
+                              <a href="{{ route('events.show', ['event' => $event->event_id]) }}">
                                   <div class="text-sm text-gray-900">{{ $event->eventname }}</div>
                                   <div class="text-sm text-gray-500">{{ $event->eventdescription }}</div>
                               </a>
@@ -91,7 +91,7 @@
                           @if($event->attendees->contains(Auth::user()))
                               <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                   <form method="POST" action="{{ url('events/reject') }}">
-                                      <input type="hidden" name="event_id" value="{{ $event->id }}">
+                                      <input type="hidden" name="event_id" value="{{ $event->event_id }}">
                                       {!! csrf_field() !!}
                                       <x-jet-button class="ml-4">
                                           Stop attending
@@ -101,7 +101,7 @@
                           @else
                               <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                   <form method="POST" action="{{ url('events/accept') }}">
-                                      <input type="hidden" name="event_id" value="{{ $event->id }}">
+                                      <input type="hidden" name="event_id" value="{{ $event->event_id }}">
                                       {!! csrf_field() !!}
                                       <x-jet-button class="ml-4">
                                           Attend

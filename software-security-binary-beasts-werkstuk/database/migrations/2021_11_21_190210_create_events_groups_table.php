@@ -17,8 +17,8 @@ class CreateEventsGroupsTable extends Migration
             $table->id();
             $table->bigInteger("event_id")->unsigned();
             $table->bigInteger("group_id")->unsigned();
-            $table->foreign('event_id')->references('id')->on('events');
-            $table->foreign('group_id')->references('id')->on('groups');
+            $table->foreign('event_id')->references('id')->on('events')->onDelete('cascade');
+            $table->foreign('group_id')->references('id')->on('groups')->onDelete('cascade');
             $table->timestamps();
         });
     }
