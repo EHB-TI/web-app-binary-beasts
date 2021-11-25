@@ -154,4 +154,15 @@ class EventsController extends Controller
     {
         //
     }
+    public function deleteEvent(Request $request){
+        $event = Event::findOrFail($request->event_id);
+        if($event->host_id == Auth::id()){
+            error_log("Deleting event");
+            $event->delete();
+        }
+        else{
+            error_log("Not deleting event");
+        }
+        return redirect(route('events.index'));
+    }
 }
