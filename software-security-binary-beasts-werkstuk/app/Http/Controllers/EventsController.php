@@ -132,7 +132,13 @@ class EventsController extends Controller
     {
         error_log("Show event");
         $event = Event::with("attendees", "groups.members")->where("id", $id)->first();
-        $isGroupEvent = $event->groups()->count() > 0;
+        $isGroupEvent;
+        if($event->groups()->exists()){
+            $isGroupEvent = $event->groups()->count() > 0;
+        }
+        else{
+            $isGroupEvent = false;
+        }
 
         // We only show the list of other attendees if the user is a teacher
         // or if the event belongs to a group where the user is a member
