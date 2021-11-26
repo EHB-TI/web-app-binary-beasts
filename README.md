@@ -1,3 +1,5 @@
+#Publieke URL: https://binarybeasts.cloudfield.be/
+
 # Goal
 
 We want to build a web application that allows EhB students & teachers to schedule events for meeting up with each other. Students and teachers can sign up with the Ehb e-mailaddress, and create events as well as join events. Teachers can assign students to class groups and create group-specific events that can only be viewed and joined by students of that group.
