@@ -2,9 +2,9 @@
 
 Legende:
 
-| Symbool | betekenis|
+| Symbool | Betekenis|
 |:---:|---|
-| ❓ | Nog niet getested|
+| ❓ | Nog niet getest|
 | ❌ | Niet geslaagd|
 | ✅ | Geslaagd|
 
@@ -89,4 +89,4 @@ Legende:
 
 ## REST API
 
-Niet van toeppassing?
+Niet van toepassing?
