@@ -9,7 +9,7 @@
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
       <div class="flex flex-col">
         <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8" style="margin-left: 175px">
-          <a class="btn" href="{{route('events.create')}}"
+          <a class="btn" id="create event" href="{{route('events.create')}}"
             style="background: #313131; color: #ffffff; padding: 10px; width: 20%; text-align: center; display: block; border-radius:3px;">
             New Event
           </a>
