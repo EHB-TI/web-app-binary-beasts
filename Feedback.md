@@ -82,11 +82,11 @@ Legende:
 | ❌ | Definieer een stricte CSP voor je toepassing - een goede CSP draagt bij tot het bestrijden van XSS en andere injection aanvallen (HTML, CSS, ....), alsmede clickjacking. |  |
 |    | <li>Laat geen unsafe-inline toe. Inline scripts of styles worden best vermeden, maar indien toch nodig, dienen ze voorzien te worden van een [hash of nonce](https://developers.google.com/web/fundamentals/security/csp/#if_you_absolutely_must_use_it)</li> |  |
 |    | <li>Laat geen unsafe-eval toe.</li> |  |
-| ❓ | Zet de X-Frame-Options header om clickjacking te vermijden. |  |
+| ✅ | Zet de X-Frame-Options header om clickjacking te vermijden. | variabele (sameorigin) |
 | ❓ | Voor actieve resources van derden wordt SubResource Integrity (SRI) gebruikt. |  |
 | ❓ | Laad geen overbodige code, dit vergroot enkel de 'attack surface' van je toepassing. |  |
-| ❓ | X-Content-Type-Options: nosniff wordt gebruikt om MIME sniffing tegen te gaan. |  |
-
+| ❌ | X-Content-Type-Options: nosniff wordt gebruikt om MIME sniffing tegen te gaan. | Niet aanwezig op /css/app.css en /js/app.js en /robots.txt|
+| ❌ | SQL Injection | High risk op /login (password) en /register (email, name) |
 ## REST API
 
 Niet van toepassing?
