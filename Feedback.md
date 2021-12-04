@@ -69,7 +69,7 @@ Legende:
 | Passed | Criteria | Notes |
 |:---:|---|---|
 | ❌ | Geheimen zijn niet publiek beschikbaar. | Er stonden 3 user account gegevens in de [README.md](https://github.com/EHB-TI/web-app-binary-beasts/blob/demo1-final/README.md#users)  |
-| ❓ | Er wordt geen gebruik gemaakt van kwetsbare componenten - geen van de runtime dependencies hebben een High of Critical Severity CVSS score. |  |
+| ✅ | Er wordt geen gebruik gemaakt van kwetsbare componenten - geen van de runtime dependencies hebben een High of Critical Severity CVSS score. |  |
 |    | Indien je sessie cookies gebruikt tussen de browser en een server-side toepassing, zorg er dan voor dat: |  |
 | ❓ | <li>Ze minstens SameSite: Lax zijn om het risico op CSRF te beperken.</li> |  |
 | ❓ | <li>Alle formulieren een CSRF token bevatten dat server-side gecontroleerd wordt.</li> |  |
