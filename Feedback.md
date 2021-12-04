@@ -20,11 +20,11 @@ Legende:
 |    ❓   | As a teacher I can (un)assign students to groups                                      |       |
 |    ❓   | As a student or teacher I can create/delete an event                                  |       |
 |    ❓   | As a student or teacher I can create/delete an event private to a specific group      |       |
-|    ❓   | As a student or teacher I can view a list of all events                               |       |
+|    ✅   | As a student or teacher I can view a list of all events                               |       |
 |    ❓   | As a student I can view a list of all events in my group                              |       |
-|    ❓   | As a student or teacher I can view the details of an event                            |       |
+|    ✅   | As a student or teacher I can view the details of an event                            |       |
 |    ❓   | As a student or teacher I can see all attendees of an event if I have rights to do so |       |
-|    ❓   | As a student or teacher I can indicate if I will be attending an event                |       |
+|    ✅   | As a student or teacher I can indicate if I will be attending an event                |       |
 |    ❓   | As an admin I can assign roles to other users (Student, Teacher, Admin)               |       |
 
 ## HTTPS
@@ -43,7 +43,7 @@ Legende:
 |:---:|---|---|
 | ✅ | Een gebruiker moet zich kunnen aanmelden. |  |
 | ✅ | Een gebruiker moet zich kunnen afmelden. |  |
-| ❓ | De applicatie geeft ten alle tijde duidelijk aan of de gebruiker al dan niet aangemeld is. |  |
+| ✅ | De applicatie geeft ten alle tijde duidelijk aan of de gebruiker al dan niet aangemeld is. | Je moet zowiso ingelogd zijn om de website te bekijken + naam van ingelogde gebruiker komt tevoorschijn |
 | ❌ | Na aanmelden kan de gebruiker zijn of haar gegevens opvragen. |  |
 | ❓ | Een gebruiker mag zich pas kunnen aanmelden als hij of zij controle over een email adres opgegeven tijdens registratie heeft aangetoond. Na het versturen van een registratieformulier krijgt de gebruiker melding dat instructies in de bevestigingsemail moeten worden opgevolgd. |  |
 
@@ -52,16 +52,16 @@ Legende:
 | Passed | Criteria | Notes |
 |:---:|---|---|
 |    | Bij registratie dient de gebruiker: |  |
-| ❓ | <li>Te kunnen kopiëren uit een password manager en in een password veld van de registratiepagina plakken.</li> |  |
+| ✅ | <li>Te kunnen kopiëren uit een password manager en in een password veld van de registratiepagina plakken.</li> |  |
 | ✅ | <li>Verplicht te worden een wachtwoord te kiezen van minstens 8 karakters.</li> |  |
-| ❓ | <li>Een zeer lang wachtwoord te kunnen kiezen met lengte minstens 64 karakters.</li> |  |
-| ❓ | <li>Elk 'printable' ASCII karakter te kunnen opnemen in het wachtwoord.</li> |  |
-| ❌ | <li>Verplicht te worden een wachtwoord te kiezen dat niet vaak voorkomt. Per definitie komt een wachtwoord niet vaak voor als het minder dan 300 keer gevonden werd in een data breach volgens Have I Been Pwned.</li> |  |
-| ❓ | Bij aanmelden dient de gebruiker te kunnen kopiëren uit een password manager en in een password veld van de aanmeldingspagina plakken. |  |
+| ✅ | <li>Een zeer lang wachtwoord te kunnen kiezen met lengte minstens 64 karakters.</li> | getest met "A7B19F5F220810526E289BB717D07CA684102B5DA043325E7D0477D549FC356A"|
+| ✅ | <li>Elk 'printable' ASCII karakter te kunnen opnemen in het wachtwoord.</li> | getest met "8-{e\!L,.j)ssXAkx(!K\'pT%)(Er\=ATqdl9+u:5R@LIV96IQlq9@_wo#%!H"`"|
+| ❌ | <li>Verplicht te worden een wachtwoord te kiezen dat niet vaak voorkomt. Per definitie komt een wachtwoord niet vaak voor als het minder dan 300 keer gevonden werd in een data breach volgens Have I Been Pwned.</li> | Mogelijk om "password" als wachtwoord te gebruiken |
+| ✅ | Bij aanmelden dient de gebruiker te kunnen kopiëren uit een password manager en in een password veld van de aanmeldingspagina plakken. |  |
 |    | De toepassing verdedigt zich tegen brute force en credential stuffing attacks. Aanvaardbare vormen van verdediging: |  |
-| ❓ | <li>Bij herhaalde mislukte pogingen verhoogt het tijdsinterval tussen pogingen exponentieel.</li> |  |
-| ❓ | <li>MFA.</li> |  |
-| ❓ | <li>Bij herhaalde mislukte pogingen wordt het account geblokkeerd. Het kan terug worden geactiveerd met een link verzonden per email.</li> |  |
+| ❌ | <li>Bij herhaalde mislukte pogingen verhoogt het tijdsinterval tussen pogingen exponentieel.</li> | Je krijgt een error '429 Too many requests' Maar je kan gewoon verder probereren|
+| ✅ | <li>MFA.</li> | Two Factor Authentication |
+| ❌ | <li>Bij herhaalde mislukte pogingen wordt het account geblokkeerd. Het kan terug worden geactiveerd met een link verzonden per email.</li> | Je krijgt een error '429 Too many requests' Maar je kan gewoon verder probereren |
 | ❓ | Wachtwoorden mogen nooit in plaintext worden opgeslagen. Enkel de output van een sterk wachtwoord-hash algoritme zoals Argon2 of bcrypt mag worden opgeslagen. |  |
 
 ## Web vulnerabilities
