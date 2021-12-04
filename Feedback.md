@@ -12,31 +12,31 @@ Legende:
 
 | Passed | Criteria                                                                              | Notes |
 |:------:|---------------------------------------------------------------------------------------|-------|
-|    ❓   | As as teacher I can sign up using my EhB e-mailaddress                                |       |
-|    ❓   | As as student I can sign up using my EhB e-mailaddress                                |       |
-|    ❓   | As a teacher or student I can login/logout                                            |       |
-|    ❓   | As a teacher I can create/view/edit/delete groups                                     |       |
-|    ❓   | As a teacher I can view all students                                                  |       |
-|    ❓   | As a teacher I can (un)assign students to groups                                      |       |
-|    ❓   | As a student or teacher I can create/delete an event                                  |       |
-|    ❓   | As a student or teacher I can create/delete an event private to a specific group      |       |
+|    ❌ | As as teacher I can sign up using my EhB e-mailaddress                                | We krijgen geen bevestigingsmail toe |
+|    ❌  | As as student I can sign up using my EhB e-mailaddress                                | Zelfde als bij teacher |
+|    ✅   | As a teacher or student I can login/logout                                            |       |
+|    ✅   | As a teacher I can create/view/edit/delete groups                                     |       |
+|    ✅   | As a teacher I can view all students                                                  |       |
+|    ✅   | As a teacher I can (un)assign students to groups                                      |       |
+|    ✅   | As a student or teacher I can create/delete an event                                  |       |
+|    ✅   | As a student or teacher I can create/delete an event private to a specific group      |       |
 |    ✅   | As a student or teacher I can view a list of all events                               |       |
-|    ❓   | As a student I can view a list of all events in my group                              |       |
+|    ✅   | As a student I can view a list of all events in my group                              |       |
 |    ✅   | As a student or teacher I can view the details of an event                            |       |
-|    ❓   | As a student or teacher I can see all attendees of an event if I have rights to do so |       |
+|    ✅  | As a student or teacher I can see all attendees of an event if I have rights to do so |       |
 |    ✅   | As a student or teacher I can indicate if I will be attending an event                |       |
-|    ❓   | As an admin I can assign roles to other users (Student, Teacher, Admin)               |       |
+|    ✅   | As an admin I can assign roles to other users (Student, Teacher, Admin)               |       |
 
 ## HTTPS
 
 | Passed | Criteria | Notes |
 |:---:|---|---|
-| ❓ | Alle publiek bereikbare onderdelen van je web toepassing mogen enkel over HTTPS beschikbaar zijn. Dit behelst dus niet enkel web pagina's en ondersteunend materiaal zoals CSS of JavaScript bestanden, maar ook publieke APIs. Deze vereiste is zo belangrijk voor de veiligheid dat oplossingen die hier niet aan voldoen een nul-score krijgen voor de demo opdrachten. |  |
+| ✅ | Alle publiek bereikbare onderdelen van je web toepassing mogen enkel over HTTPS beschikbaar zijn. Dit behelst dus niet enkel web pagina's en ondersteunend materiaal zoals CSS of JavaScript bestanden, maar ook publieke APIs. Deze vereiste is zo belangrijk voor de veiligheid dat oplossingen die hier niet aan voldoen een nul-score krijgen voor de demo opdrachten. |  |
 | ❓ | Server X.509 certificaten vormen deel van een certificate chain waarvan de root voorkomt in de standaard trust store van mainstream browsers, zoals Firefox, Chrome of Safari, of beheerssystemen, zoals Windows, macOS of Linux. |  |
 | ✅ | Je domein of domeinen krijgen minstens een A score bij de [SSL Labs server test](https://www.ssllabs.com/ssltest/analyze.html?d=cloudfield.be). |  |
-| ❓ | Iedere respons bevat een Strict-Transport-Security header. |  |
+| ✅ | Iedere respons bevat een Strict-Transport-Security header. |  |
 | ✅ | Je domein of domeinen staan in de [HSTS preload list](https://hstspreload.org/?domain=cloudfield.be) of wachten op toevoeging. | Still pending |
-| ❓ | Er zijn CAA DNS Resource Records voor je domein of domeinen. |  |
+| ✅ | Er zijn CAA DNS Resource Records voor je domein of domeinen. | Issues by Amazonaws.com |
 
 ## Aanmelden
 | Passed | Criteria | Notes |
@@ -45,7 +45,7 @@ Legende:
 | ✅ | Een gebruiker moet zich kunnen afmelden. |  |
 | ✅ | De applicatie geeft ten alle tijde duidelijk aan of de gebruiker al dan niet aangemeld is. | Je moet zowiso ingelogd zijn om de website te bekijken + naam van ingelogde gebruiker komt tevoorschijn |
 | ❌ | Na aanmelden kan de gebruiker zijn of haar gegevens opvragen. |  |
-| ❓ | Een gebruiker mag zich pas kunnen aanmelden als hij of zij controle over een email adres opgegeven tijdens registratie heeft aangetoond. Na het versturen van een registratieformulier krijgt de gebruiker melding dat instructies in de bevestigingsemail moeten worden opgevolgd. |  |
+| ✅ | Een gebruiker mag zich pas kunnen aanmelden als hij of zij controle over een email adres opgegeven tijdens registratie heeft aangetoond. Na het versturen van een registratieformulier krijgt de gebruiker melding dat instructies in de bevestigingsemail moeten worden opgevolgd. | Maar de mail wordt niet onvangen op een ehb-email address |
 
 ## Wachtwoorden
 
@@ -72,7 +72,7 @@ Legende:
 | ✅ | Er wordt geen gebruik gemaakt van kwetsbare componenten - geen van de runtime dependencies hebben een High of Critical Severity CVSS score. |  |
 |    | Indien je sessie cookies gebruikt tussen de browser en een server-side toepassing, zorg er dan voor dat: |  |
 | ❓ | <li>Ze minstens SameSite: Lax zijn om het risico op CSRF te beperken.</li> |  |
-| ❓ | <li>Alle formulieren een CSRF token bevatten dat server-side gecontroleerd wordt.</li> |  |
+| ✅ | <li>Alle formulieren een CSRF token bevatten dat server-side gecontroleerd wordt.</li> |  |
 | ❓ | <li>De sessie afloopt na verloop van tijd.</li> |  |
 |    | Indien je cookies gebruikt om het access token te transporteren tussen een SPA en de REST API (kan enkel indien OP, static web server en API hetzelfde naakte domein gebruiken), zorg er dan voor dat |  |
 | ❓ | <li>Ze SameSite: Strict zijn om CSRF te vermijden.</li> |  |
