@@ -73,7 +73,7 @@ Legende:
 |    | Indien je sessie cookies gebruikt tussen de browser en een server-side toepassing, zorg er dan voor dat: |  |
 | ❓ | <li>Ze minstens SameSite: Lax zijn om het risico op CSRF te beperken.</li> |  |
 | ✅ | <li>Alle formulieren een CSRF token bevatten dat server-side gecontroleerd wordt.</li> |  |
-| ❓ | <li>De sessie afloopt na verloop van tijd.</li> |  |
+| ✅ | <li>De sessie afloopt na verloop van tijd.</li> |  |
 |    | Indien je cookies gebruikt om het access token te transporteren tussen een SPA en de REST API (kan enkel indien OP, static web server en API hetzelfde naakte domein gebruiken), zorg er dan voor dat |  |
 | ❓ | <li>Ze SameSite: Strict zijn om CSRF te vermijden.</li> |  |
 | ❓ | <li>Enkel over een geëncrypteeerd connectie kunnen worden verstuurd (Secure vlag).</li> |  |
