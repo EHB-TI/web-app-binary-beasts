@@ -159,25 +159,25 @@ Niet van toepassing?
 
 ### OWASP ZAP
 
-Toegankelijke URLS
+Toegankelijke URLS <br>
 ![Toegankelijke URLS image](documents/images/Toegankelijke_URLS.jpeg)
 
-Httpacces Information Leak
+Httpacces Information Leak <br>
 ![Httpacces Information Leak image](documents/images/HTTPS_information_leak.jpeg)
 
-Format String Error (login en register formulier)
+Format String Error (login en register formulier) <br>
 ![ormat String Error image](documents/images/Format_string_error.jpeg)
 
-Cookie No HttpOnly Flag
+Cookie No HttpOnly Flag<br>
 ![Cookie No HttpOnly Flag image](documents/images/Cookie_no_http_flag.jpeg)
 
-X-content-type-options header missing
+X-content-type-options header missing<br>
 ![X-content-type-options header missing image](documents/images/X_contentype_headermissing.jpeg)
 
-Path Traversal
+Path Traversal<br>
 ![Path Traversal image](documents/images/Path_traversal.jpeg)
 
-SQL injection
+SQL injection<br>
 ![SQL injection image](documents/images/SQL_injection.jpeg)
 
 ### Samgrep
