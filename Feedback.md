@@ -9,8 +9,14 @@
   - [Wachtwoorden](#Wachtwoorden)
   - [Web vulnerabilities](#Web-vulnerabilities)
   - [REST API](#REST-API)
+- [Threat Model](#Threat-Model)
+  - [DOS / DDOS Attack](#DOS-/-DDOS-Attack)
+  - [Overig](#Overig)
 - [Aanbevelingen](#Aanbevelingen)
-- [Bijlages](#Bijlages)
+- [Bijlages](#Bijlages) -[OWASP ZAP](#OWASP-ZAP)
+  - [Samgrep](#Samgrep)
+  - [Gitleaks](#Gitleaks)
+  - [Snyk](#Snyk)
 
 ## Gebruikte tools
 
@@ -47,8 +53,6 @@ We hebben deze tools gebruikt om te testen uit te voeren:
 |   🟢    | Low           |
 
 ## Testen
-
-Minor, Medium ,Severe 💀
 
 ### Acceptance criteria
 
@@ -104,20 +108,20 @@ Enkel het opvragen van de gegevens van de user nadat deze zich heeft aangemeld, 
 
 ### Wachtwoorden
 
-| Passed | Criteria                                                                                                                                                                                                               | Notes                                                                            | Severity |
-| :----: | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | :------: |
-|        | Bij registratie dient de gebruiker:                                                                                                                                                                                    |                                                                                  |          |
-|   ✅   | <li>Te kunnen kopiëren uit een password manager en in een password veld van de registratiepagina plakken.</li>                                                                                                         |                                                                                  |          |
-|   ✅   | <li>Verplicht te worden een wachtwoord te kiezen van minstens 8 karakters.</li>                                                                                                                                        |                                                                                  |          |
-|   ✅   | <li>Een zeer lang wachtwoord te kunnen kiezen met lengte minstens 64 karakters.</li>                                                                                                                                   | getest met "A7B19F5F220810526E289BB717D07CA684102B5DA043325E7D0477D549FC356A"    |          |
-|   ✅   | <li>Elk 'printable' ASCII karakter te kunnen opnemen in het wachtwoord.</li>                                                                                                                                           | getest met "8-{e\!L,.j)ssXAkx(!K\'pT%)(Er\=ATqdl9+u:5R@LIV96IQlq9@\_wo#%!H"`"    |          |
-|   ❌   | <li>Verplicht te worden een wachtwoord te kiezen dat niet vaak voorkomt. Per definitie komt een wachtwoord niet vaak voor als het minder dan 300 keer gevonden werd in een data breach volgens Have I Been Pwned.</li> | Mogelijk om "password" als wachtwoord te gebruiken                               |    🔴    |
-|   ✅   | Bij aanmelden dient de gebruiker te kunnen kopiëren uit een password manager en in een password veld van de aanmeldingspagina plakken.                                                                                 |                                                                                  |          |
-|        | De toepassing verdedigt zich tegen brute force en credential stuffing attacks. Aanvaardbare vormen van verdediging:                                                                                                    |                                                                                  |          |
-|   ❌   | <li>Bij herhaalde mislukte pogingen verhoogt het tijdsinterval tussen pogingen exponentieel.</li>                                                                                                                      | Je krijgt een error '429 Too many requests' Maar je kan gewoon verder probereren |    🔵    |
-|   ✅   | <li>MFA.</li>                                                                                                                                                                                                          | Two Factor Authentication                                                        |          |
-|   ❌   | <li>Bij herhaalde mislukte pogingen wordt het account geblokkeerd. Het kan terug worden geactiveerd met een link verzonden per email.</li>                                                                             | Je krijgt een error '429 Too many requests' Maar je kan gewoon verder probereren |    🔵    |
-|   ✅   | Wachtwoorden mogen nooit in plaintext worden opgeslagen. Enkel de output van een sterk wachtwoord-hash algoritme zoals Argon2 of bcrypt mag worden opgeslagen.                                                         |                                                                                  |          |
+| Passed | Criteria                                                                                                                                                                                                               | Notes                                                                          | Severity |
+| :----: | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ | :------: |
+|        | Bij registratie dient de gebruiker:                                                                                                                                                                                    |                                                                                |          |
+|   ✅   | <li>Te kunnen kopiëren uit een password manager en in een password veld van de registratiepagina plakken.</li>                                                                                                         |                                                                                |          |
+|   ✅   | <li>Verplicht te worden een wachtwoord te kiezen van minstens 8 karakters.</li>                                                                                                                                        |                                                                                |          |
+|   ✅   | <li>Een zeer lang wachtwoord te kunnen kiezen met lengte minstens 64 karakters.</li>                                                                                                                                   | getest met "A7B19F5F220810526E289BB717D07CA684102B5DA043325E7D0477D549FC356A"  |          |
+|   ✅   | <li>Elk 'printable' ASCII karakter te kunnen opnemen in het wachtwoord.</li>                                                                                                                                           | getest met "8-{e\!L,.j)ssXAkx(!K\'pT%)(Er\=ATqdl9+u:5R@LIV96IQlq9@\_wo#%!H"`"  |          |
+|   ❌   | <li>Verplicht te worden een wachtwoord te kiezen dat niet vaak voorkomt. Per definitie komt een wachtwoord niet vaak voor als het minder dan 300 keer gevonden werd in een data breach volgens Have I Been Pwned.</li> | Mogelijk om "password" als wachtwoord te gebruiken                             |    🔴    |
+|   ✅   | Bij aanmelden dient de gebruiker te kunnen kopiëren uit een password manager en in een password veld van de aanmeldingspagina plakken.                                                                                 |                                                                                |          |
+|        | De toepassing verdedigt zich tegen brute force en credential stuffing attacks. Aanvaardbare vormen van verdediging:                                                                                                    |                                                                                |          |
+|   ❌   | <li>Bij herhaalde mislukte pogingen verhoogt het tijdsinterval tussen pogingen exponentieel.</li>                                                                                                                      | Je krijgt een error '429 Too many requests' Maar je kan gewoon verder proberen |    🔵    |
+|   ✅   | <li>MFA.</li>                                                                                                                                                                                                          | Two Factor Authentication                                                      |          |
+|   ❌   | <li>Bij herhaalde mislukte pogingen wordt het account geblokkeerd. Het kan terug worden geactiveerd met een link verzonden per email.</li>                                                                             | Je krijgt een error '429 Too many requests' Maar je kan gewoon verder proberen |    🔵    |
+|   ✅   | Wachtwoorden mogen nooit in plaintext worden opgeslagen. Enkel de output van een sterk wachtwoord-hash algoritme zoals Argon2 of bcrypt mag worden opgeslagen.                                                         |                                                                                |          |
 
 #### Conclusie
 
