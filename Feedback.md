@@ -3,7 +3,7 @@
 - [Gebruikte tools](#Gebruikte-tools)
 - [Legende](#Legende)
 - [Testen](#Testen)
-  - [Acceptence criteria](#Acceptence-criteria)
+  - [Acceptance criteria](#Acceptance-criteria)
   - [HTTPS](#HTTPS)
   - [Aanmelden](#Aanmelden)
   - [Wachtwoorden](#Wachtwoorden)
@@ -75,7 +75,7 @@ We hebben deze tools gebruikt om te testen uit te voeren:
 
 #### Conclusie
 
-Alle acceptence criteria zijn voldaan, behalve het zich kunnen inloggen met een EhB e-mailadres voor zowel student als teacher. De user krijgt geen bevestigingsmail waardoor hij zich niet kan verifiëren en geen toegang heeft op de website.
+Alle acceptance criteria zijn voldaan, behalve het zich kunnen inloggen met een EhB e-mailadres voor zowel student als teacher. De user krijgt geen bevestigingsmail waardoor hij zich niet kan verifiëren en geen toegang heeft op de website.
 
 ### HTTPS
 
@@ -99,7 +99,7 @@ Er wordt aan alle HTTPS-criteria voldaan. Het domein wacht nog op toevoeging in 
 |   ✅   | Een gebruiker moet zich kunnen aanmelden.                                                                                                                                                                                                                                           |                                                                                                                           |          |
 |   ✅   | Een gebruiker moet zich kunnen afmelden.                                                                                                                                                                                                                                            |                                                                                                                           |          |
 |   ✅   | De applicatie geeft ten alle tijde duidelijk aan of de gebruiker al dan niet aangemeld is.                                                                                                                                                                                          | Je moet sowieso ingelogd zijn om de website te bekijken + naam van ingelogde gebruiker komt tevoorschijn                  |          |
-|   ❌   | Na aanmelden kan de gebruiker zijn of haar gegevens opvragen.                                                                                                                                                                                                                       | Kan niet zien welke rol je hebt, maar user heeft wel eigen profile-page, Ook niet mogelijk om user gegevens te downloaden |    🟡    |
+|   ❌   | Na aanmelden kan de gebruiker zijn of haar gegevens opvragen.                                                                                                                                                                                                                       | Kan niet zien welke rol je hebt, maar user heeft wel eigen profile-page, ook niet mogelijk om user gegevens te downloaden |    🟡    |
 |   ✅   | Een gebruiker mag zich pas kunnen aanmelden als hij of zij controle over een email adres opgegeven tijdens registratie heeft aangetoond. Na het versturen van een registratieformulier krijgt de gebruiker melding dat instructies in de bevestigingsemail moeten worden opgevolgd. | Maar de mail wordt niet onvangen op een ehb-email address                                                                 |          |
 
 #### Conclusie
@@ -143,7 +143,7 @@ Hier zijn een aantal criteria niet voldaan, namelijk:
 |   ✅   | <li>De sessie afloopt na verloop van tijd.</li>                                                                                                                                                                                                               |                                                                                                                                        |          |
 |        | Indien je cookies gebruikt om het access token te transporteren tussen een SPA en de REST API (kan enkel indien OP, static web server en API hetzelfde naakte domein gebruiken), zorg er dan voor dat                                                         |                                                                                                                                        |          |
 |   ✅   | <li>Ze SameSite: Strict zijn om CSRF te vermijden.</li>                                                                                                                                                                                                       |                                                                                                                                        |          |
-|   ✅   | <li>Enkel over een geëncrypteeerd connectie kunnen worden verstuurd (Secure vlag).</li>                                                                                                                                                                       |                                                                                                                                        |          |
+|   ✅   | <li>Enkel over een geëncrypteerd connectie kunnen worden verstuurd (Secure vlag).</li>                                                                                                                                                                        |                                                                                                                                        |          |
 |   ✅   | Maak zo veel mogelijk gebruik van escaping en output encoding van een templating engine om XSS te vermijden.                                                                                                                                                  |                                                                                                                                        |          |
 |   ✅   | Indien escaping van niet-vertrouwde data onmogelijk is, zorg dan voor sanitization om XSS te vermijden.                                                                                                                                                       |                                                                                                                                        |          |
 |   ❌   | Definieer een stricte CSP voor je toepassing - een goede CSP draagt bij tot het bestrijden van XSS en andere injection aanvallen (HTML, CSS, ....), alsmede clickjacking.                                                                                     |                                                                                                                                        |    🟡    |
@@ -159,7 +159,7 @@ Hier zijn een aantal criteria niet voldaan, namelijk:
 
 De criteria waaraan niet voldaan werden, zijn de volgende:
 
-- Geheimen zijn niet publiek beschikbaar. We hebben de inlogggegevens van drie useraccounts in de README.md teruggevonden
+- Geheimen zijn niet publiek beschikbaar. We hebben de inloggegevens van drie useraccounts in de README.md teruggevonden
 - Er is geen stricte CSP
 - In enkele bestanden wordt er geen nosniff gebruikt
 - Er is een hoog risico op SQL injection op de loginpagina (wachtwoord) en de registratiepagina (e-mail en username)
@@ -181,7 +181,7 @@ Alle andere zaken die vermeld stonden in de threat model lijken volgens ons in o
 ## Aanbevelingen
 
 - Zowel de server header (Nginx 1.20.0) als de php versie (8.0.8) zijn zichtbaar.
-- Inloggevegens niet zichtbaar zetten op Github
+- Inloggegevens niet zichtbaar zetten op Github
 - Een publieke homepagina maken voor de gebruiksvriendelijkheid
 - Er zijn Github oauth routes beschikbaar, maar deze worden niet in de front-end gebruikt
 - Er is geen verificatie voor fake e-mailadressen
