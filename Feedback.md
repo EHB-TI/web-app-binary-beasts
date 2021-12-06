@@ -129,7 +129,7 @@ Hier zijn een aantal criteria niet voldaan, namelijk:
 
 - Men kan een account maken met vaak voorkomend wachtwoord (wij hebben dit uitgetest met het wachtwoord 'password')
 - Er is geen verhoogde tijdsinterval bij herhaalde mislukte pogingen om zich aan te melden
-- Het account wordt niet geblokkeerd na herhaalde mislukte poginginen om zich aan te melden
+- Het account wordt niet geblokkeerd na herhaalde mislukte pogingen om zich aan te melden
 
 ### Web vulnerabilities
 
