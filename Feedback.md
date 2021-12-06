@@ -143,6 +143,14 @@ De criteria waaraan niet voldaan werden, zijn de volgende:
 
 Niet van toepassing?
 
+
+## Threat Model
+
+### DOS / DDOS Attack
+Indien je aangevallen wordt, worden er duizenden requests per seconden naar je server gestuurd en hoe het bij jullie zou gaan zal de website altijd online blijven door middel van auto scaling (via aws) maar Dit kan heel duur zijn, zeker dat zo een aanval soms meerdere uren duurt. Hoe wij dit probleem hebben opgelost is door middel van CloudFlare, al de requests worden eerst naar cloudflare afgehandeld en daarna doorgestuurd naar de server op AWS. En Cloudflare heeft een ingebouwde functie om DDOS of DOS attacken tegen te houden, en zal uw server nooit overbelast raken door een aanval
+### Overig
+Alle andere zaken die vermeld stonden in de threat model lijken volgens ons in orde
+
 ## Aanbevelingen
 
 - Zowel de server header (Nginx 1.20.0) als de php versie (8.0.8) zijn zichtbaar.
@@ -153,6 +161,11 @@ Niet van toepassing?
 - ReCaptcha toevoegen aan contactformulier
 - Na de registratie kan de user zich al uitloggen nog voor hij een bevestigingsmail heeft gekregen
 - Er is geen verificatie voor fake e-mailadressen
+- Het is mogelijk om veel voorkomende wachtwoorden te gebruiken (meer dan 300keer gevonden in een databreach). Hadden wij dit als oplossing gevonden.
+ Jullie zouden deze file moeten aanpassen met behulp van onderstaande screenshot (App/Actions/Fortify/PasswordValidationRules.php) (regels: 6 + 18 + 19)
+![Niet veel voorkomende wachtwoord fix](documents/images/passwordProtection.JPG)
+
+
 
 ## Bijlages
 
