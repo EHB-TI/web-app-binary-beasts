@@ -10,25 +10,30 @@
   - [Web vulnerabilities](#Web-vulnerabilities)
   - [REST API](#REST-API)
 - [Threat Model](#Threat-Model)
-  - [DOS / DDOS Attack](#DOS-/-DDOS-Attack)
-  - [Overig](#Overig)
+  - [DoS / DDoS Attack](#DoS-/-DDoS-Attack)
+  - [Overige](#Overige)
 - [Aanbevelingen](#Aanbevelingen)
 - [Bijlages](#Bijlages) 
   - [OWASP ZAP](#OWASP-ZAP)
   - [Samgrep](#Samgrep)
   - [Gitleaks](#Gitleaks)
   - [Snyk](#Snyk)
+  - [Raport Detectify](#Raport-Detectify)
+  - [Raport Probely](#Raport-Probely)
 
 ## Gebruikte tools
 
 We hebben deze tools gebruikt om de testen uit te voeren:
 
+Applicaties
 - OWASP ZAP
 - Semgrep
 - Gitleaks
 - Dependabot
 - Snyk
 - Npm audit
+
+Webtools
 - Observatory van mozilla
 - Redbot
 - Urlscan
@@ -171,22 +176,23 @@ Geen gebruik van REST API enkel de ingebouwde routes van het Laravel framework.
 
 ## Threat Model
 
-### DOS / DDOS Attack
+### DoS / DDoS Attack
 
-Indien je aangevallen wordt, worden er duizenden requests per seconden naar je server gestuurd en hoe het bij jullie zou gaan zal de website altijd online blijven door middel van auto scaling (via aws), maar dit kan heel duur zijn, zeker dat zo een aanval soms meerdere uren duurt. Hoe wij dit probleem hebben opgelost is door middel van CloudFlare, al de requests worden eerst naar cloudflare afgehandeld en daarna doorgestuurd naar de server op AWS. En Cloudflare heeft een ingebouwde functie om DDOS of DOS attacken tegen te houden, en zal uw server nooit overbelast raken door een aanval
+Deze site is niet beschermd tegen DDoS attacks. Indien er toch een aanval plaats vindt schaalt de server automatisch. Dit kan zeer kostelijk worden.
+U kan dit probleem oplossen door gebruik te maken van de reverse proxy service van CloudFlare.
 
-### Overig
+### Overige
 
-Alle andere zaken die vermeld stonden in de threat model lijken volgens ons in orde
+Alle andere zaken die vermeld stonden in de threat model lijken volgens ons in orde.
 
 ## Aanbevelingen
 
-- Zowel de server header (Nginx 1.20.0) als de php versie (8.0.8) zijn zichtbaar.
+- Zowel de server header (Nginx 1.20.0) als de php versie (8.0.8) zijn zichtbaar
 - Inloggegevens niet zichtbaar zetten op Github
 - Een publieke homepagina maken voor de gebruiksvriendelijkheid
 - Er zijn Github oauth routes beschikbaar, maar deze worden niet in de front-end gebruikt
 - Er is geen verificatie voor fake e-mailadressen
-- Het is mogelijk om veel voorkomende wachtwoorden te gebruiken (meer dan 300keer gevonden in een databreach). Hadden wij dit als oplossing gevonden.
+- Het is mogelijk om veel voorkomende wachtwoorden te gebruiken (meer dan 300 keer gevonden in een databreach). Hadden wij dit als oplossing gevonden
   Jullie zouden deze file moeten aanpassen met behulp van onderstaande screenshot (App/Actions/Fortify/PasswordValidationRules.php) (regels: 6 + 18 + 19)<br>
   ![Niet veel voorkomende wachtwoord fix](documents/images/passwordProtection.JPG)
 
