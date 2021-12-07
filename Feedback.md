@@ -20,7 +20,7 @@
 
 ## Gebruikte tools
 
-We hebben deze tools gebruikt om te testen uit te voeren:
+We hebben deze tools gebruikt om de testen uit te voeren:
 
 - OWASP ZAP
 - Semgrep
@@ -172,7 +172,7 @@ Geen gebruik van REST API enkel de ingebouwde routes van het Laravel framework.
 
 ### DOS / DDOS Attack
 
-Indien je aangevallen wordt, worden er duizenden requests per seconden naar je server gestuurd en hoe het bij jullie zou gaan zal de website altijd online blijven door middel van auto scaling (via aws) maar Dit kan heel duur zijn, zeker dat zo een aanval soms meerdere uren duurt. Hoe wij dit probleem hebben opgelost is door middel van CloudFlare, al de requests worden eerst naar cloudflare afgehandeld en daarna doorgestuurd naar de server op AWS. En Cloudflare heeft een ingebouwde functie om DDOS of DOS attacken tegen te houden, en zal uw server nooit overbelast raken door een aanval
+Indien je aangevallen wordt, worden er duizenden requests per seconden naar je server gestuurd en hoe het bij jullie zou gaan zal de website altijd online blijven door middel van auto scaling (via aws), maar dit kan heel duur zijn, zeker dat zo een aanval soms meerdere uren duurt. Hoe wij dit probleem hebben opgelost is door middel van CloudFlare, al de requests worden eerst naar cloudflare afgehandeld en daarna doorgestuurd naar de server op AWS. En Cloudflare heeft een ingebouwde functie om DDOS of DOS attacken tegen te houden, en zal uw server nooit overbelast raken door een aanval
 
 ### Overig
 
