@@ -228,3 +228,11 @@ SQL injection<br>
 ![snyk1 image](documents/images/snyk1.png)
 ![snyk2 image](documents/images/snyk2.png)
 ![snyk3 image](documents/images/snyk3.png)
+
+### Raport Detectify 
+
+[Link naar raport Detectify](documents/PDFs/Detectify-Report-Binary-Beasts-2021-06-12.pdf)
+
+### Raport Probely 
+
+[Link naar raport Probely](documents/PDFs/Probely-Report-Binary-Beasts-2021-06-12.pdf)
