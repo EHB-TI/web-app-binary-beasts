@@ -1,0 +1,22 @@
+<?php
+namespace App\Http\Middleware;
+use Closure;
+
+class SecurityHeaders
+{
+    // Enumerate headers which you do not want in your application's responses.
+    // Great starting point would be to go check out @Scott_Helme's:
+    // https://securityheaders.com/
+
+    public function handle($request, Closure $next)
+    {
+        $response = $next($request);
+        $response->headers->set('Referrer-Policy', 'no-referrer-when-downgrade');
+        $response->headers->set('X-Content-Type-Options', 'nosniff');
+        $response->headers->set('X-XSS-Protection', '1; mode=block');
+        $response->headers->set('X-Frame-Options', 'DENY');
+        return $response;
+    }
+
+}
+
